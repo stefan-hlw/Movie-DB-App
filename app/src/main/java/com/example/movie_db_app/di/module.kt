@@ -13,6 +13,7 @@ import com.example.movie_db_app.utils.constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -61,6 +62,10 @@ val applicationModule = module {
     }
 
 
+
+
+
+
     fun provideRetrofitBuilder(gson: Gson): Retrofit.Builder {
 //         Connection timeouts can be added here if desired
 //        val httpClient = OkHttpClient.Builder().addInterceptor {
@@ -71,7 +76,10 @@ val applicationModule = module {
 //            val newReq = oldReq.newBuilder().url(newUrl).build()
 //            it.proceed(newReq)
 //        }.build()
-        val httpClient = OkHttpClient.Builder().build()
+        val logging = HttpLoggingInterceptor()
+
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val httpClient = OkHttpClient.Builder().addInterceptor(logging).build()
 
         return Retrofit.Builder()
             .baseUrl(constants.BASE_URL)

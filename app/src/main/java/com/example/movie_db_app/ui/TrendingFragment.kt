@@ -35,14 +35,16 @@ class TrendingFragment: Fragment() {
 
 
     fun test123() {
-
-
         movieListViewModel.getTrendingMovies()
+        Thread.sleep(2000)
+        Log.i(movieListViewModel.trendingMoviesLiveData.value.toString(), "LIVE_DATA")
     }
 //    private fun setMovieListAdapter(movieList: List<Movie>) {
 //        movieListAdapter = MovieListAdapter(requireContext(), movieList)
 //        view?.findViewById<RecyclerView>(R.id.rc_movies_list)?.adapter = movieListAdapter
 //    }
+
+
 
 
 
