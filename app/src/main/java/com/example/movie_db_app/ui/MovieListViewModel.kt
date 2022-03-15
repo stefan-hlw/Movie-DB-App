@@ -1,28 +1,25 @@
 package com.example.movie_db_app.ui
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.movie_db_app.data.database.Movie
-import com.example.movie_db_app.data.remote.MovieListResponse
+import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.data.repository.MovieListRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class MovieListViewModel(
-    private val movieListRepo: MovieListRepo): ViewModel() {
+    private val movieListRepo: MovieListRepo
+) : ViewModel() {
 
-    var trendingMoviesLiveData = MutableLiveData<Response<MovieListResponse>>()
+    var moviesData = MutableLiveData<List<MovieItemResponse>>()
+    private val cs = CoroutineScope(Dispatchers.IO)
 
     fun getTrendingMovies() {
-        viewModelScope.launch {
-            trendingMoviesLiveData.value = movieListRepo.getTrendingMovies()
+        cs.launch {
+            moviesData.postValue(movieListRepo.getTrendingMovies().body()?.results!!)
         }
+
     }
-
-
 
 }

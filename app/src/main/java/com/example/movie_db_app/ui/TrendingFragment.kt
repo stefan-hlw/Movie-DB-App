@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.Movie
+import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.ui.MovieListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Response
@@ -17,7 +18,7 @@ import retrofit2.Response
 class TrendingFragment: Fragment() {
 
     private val movieListViewModel by viewModel<MovieListViewModel>()
-//    private var movieListAdapter: MovieListAdapter? = null
+    private var movieListAdapter: MovieListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,18 +32,29 @@ class TrendingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         test123()
+        setObservers()
+
     }
 
 
     fun test123() {
         movieListViewModel.getTrendingMovies()
-        Thread.sleep(2000)
-        Log.i(movieListViewModel.trendingMoviesLiveData.value.toString(), "LIVE_DATA")
     }
-//    private fun setMovieListAdapter(movieList: List<Movie>) {
-//        movieListAdapter = MovieListAdapter(requireContext(), movieList)
-//        view?.findViewById<RecyclerView>(R.id.rc_movies_list)?.adapter = movieListAdapter
-//    }
+
+    fun setObservers() {
+        movieListViewModel.moviesData.observe(viewLifecycleOwner, Observer {
+            println(it[0])
+            setMovieListAdapter(it)
+            movieListAdapter?.notifyDataSetChanged()
+            println("INDIVIDUAL_MOVIE")
+        })
+
+
+    }
+    private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
+        movieListAdapter = MovieListAdapter(requireContext(), movieList)
+        view?.findViewById<RecyclerView>(R.id.rc_movies_list)?.adapter = movieListAdapter
+    }
 
 
 

@@ -67,19 +67,21 @@ val applicationModule = module {
 
 
     fun provideRetrofitBuilder(gson: Gson): Retrofit.Builder {
-//         Connection timeouts can be added here if desired
-//        val httpClient = OkHttpClient.Builder().addInterceptor {
-//            val oldReq = it.request()
-//            val newUrl = oldReq.url.newBuilder()
-//                .addQueryParameter("api_key", constants.API_KEY)
-//                .build()
-//            val newReq = oldReq.newBuilder().url(newUrl).build()
-//            it.proceed(newReq)
-//        }.build()
         val logging = HttpLoggingInterceptor()
-
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val httpClient = OkHttpClient.Builder().addInterceptor(logging).build()
+
+  //       Connection timeouts can be added here if desired
+
+        val httpClient = OkHttpClient.Builder().addInterceptor {
+            val oldReq = it.request()
+            val newUrl = oldReq.url.newBuilder()
+                .addQueryParameter("api_key", constants.API_KEY)
+                .build()
+            val newReq = oldReq.newBuilder().url(newUrl).build()
+            it.proceed(newReq)
+        }.addInterceptor(logging).build()
+
+//        val httpClient = OkHttpClient.Builder().addInterceptor(logging).build()
 
         return Retrofit.Builder()
             .baseUrl(constants.BASE_URL)
