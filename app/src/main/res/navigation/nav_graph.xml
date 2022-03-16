@@ -25,6 +25,14 @@
     </fragment>
     <fragment
         android:id="@+id/trendingFragment"
-        android:name="com.example.movie_db_app.ui.TrendingFragment"
+        android:name="com.example.movie_db_app.ui.trending.TrendingFragment"
         android:label="TrendingFragment" />
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="com.example.movie_db_app.ui.GenresFragment"
+        android:label="GenresFragment" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.movie_db_app.ui.FavoritesFragment"
+        android:label="FavoritesFragment" />
 </navigation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/trendingFragment"
+        android:icon="@drawable/ic_baseline_trending"
+        android:title="Trending" />
+    <item
+        android:id="@+id/genresFragment"
+        android:icon="@drawable/ic_baseline_toc"
+        android:title="Genres" />
+    <item
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/ic_baseline_star"
+        android:title="Favorites" />
+</menu>

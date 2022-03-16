@@ -1,6 +1,7 @@
 package com.example.movie_db_app.ui.registration
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
@@ -46,6 +48,7 @@ class RegistrationFragment : Fragment() {
 
         view?.findViewById<Button>(R.id.register_button)?.setOnClickListener{
             createUser()
+            showRegistrationPopUpDialog()
         }
 
         val minCalendar = Calendar.getInstance()
@@ -97,6 +100,17 @@ class RegistrationFragment : Fragment() {
         val myFormat = "dd/MM/yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
         view?.findViewById<TextView>(R.id.birthday_picker)?.text = sdf.format(cal)
+    }
+
+    private fun showRegistrationPopUpDialog() {
+        val dialogBuilder = AlertDialog.Builder(context!!)
+        dialogBuilder.setMessage("The user has been successfully created, you will be redirected to login page")
+        dialogBuilder.setPositiveButton("Ok",
+            DialogInterface.OnClickListener { dialog, whichButton ->
+                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+            })
+        val b = dialogBuilder.create()
+        b.show()
     }
 
 

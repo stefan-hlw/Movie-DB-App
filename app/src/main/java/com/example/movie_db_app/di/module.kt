@@ -1,6 +1,10 @@
 package com.example.movie_db_app.di
 
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
+import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.AppDatabase
 import com.example.movie_db_app.data.remote.ServiceApi
 import com.example.movie_db_app.data.repository.MovieListRepo
@@ -14,6 +18,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -25,9 +30,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val applicationModule = module {
     single {
-        Room.databaseBuilder(androidContext(),
+        Room.databaseBuilder(
+            androidContext(),
             AppDatabase::class.java,
-            "database-name").build()
+            "database-name"
+        ).build()
     }
 
     single {
@@ -50,7 +57,27 @@ val applicationModule = module {
         MovieListViewModel(get())
     }
 
-    fun provideApi(retrofitBuilder : Retrofit.Builder): ServiceApi {
+    //Glide setup
+
+    fun provideRequestOptions(): RequestOptions {
+        return RequestOptions
+            .placeholderOf(R.drawable.placeholder_image)
+            .error(R.drawable.placeholder_image)
+    }
+
+    single { provideRequestOptions() }
+
+    fun provideGlideInstance(application: Application, requestOptions: RequestOptions): RequestManager {
+        return Glide.with(application).setDefaultRequestOptions(requestOptions)
+    }
+
+    single { provideGlideInstance(androidApplication() as Application, get()) }
+
+    factory { GlideInstance(get()) }
+
+    // Retrofit setup
+
+    fun provideApi(retrofitBuilder: Retrofit.Builder): ServiceApi {
         return retrofitBuilder
             .build()
             .create(ServiceApi::class.java)
@@ -62,15 +89,11 @@ val applicationModule = module {
     }
 
 
-
-
-
-
     fun provideRetrofitBuilder(gson: Gson): Retrofit.Builder {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-  //       Connection timeouts can be added here if desired
+        // Connection timeout parameters can be added here if desired
 
         val httpClient = OkHttpClient.Builder().addInterceptor {
             val oldReq = it.request()
@@ -80,8 +103,6 @@ val applicationModule = module {
             val newReq = oldReq.newBuilder().url(newUrl).build()
             it.proceed(newReq)
         }.addInterceptor(logging).build()
-
-//        val httpClient = OkHttpClient.Builder().addInterceptor(logging).build()
 
         return Retrofit.Builder()
             .baseUrl(constants.BASE_URL)
@@ -101,4 +122,6 @@ val applicationModule = module {
     single {
         provideApi(get(named("API")))
     }
+
+
 }

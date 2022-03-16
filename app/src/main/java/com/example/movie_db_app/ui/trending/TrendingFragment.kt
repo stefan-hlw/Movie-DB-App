@@ -1,7 +1,6 @@
-package com.example.movie_db_app.ui
+package com.example.movie_db_app.ui.trending
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_db_app.R
-import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.remote.MovieItemResponse
+import com.example.movie_db_app.ui.MovieListAdapter
 import com.example.movie_db_app.ui.MovieListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.Response
 
 class TrendingFragment: Fragment() {
 
