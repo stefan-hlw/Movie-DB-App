@@ -18,7 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.ui.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.time.LocalDate
 import java.util.*
 
 class RegistrationFragment : Fragment() {

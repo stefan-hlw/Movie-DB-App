@@ -1,11 +1,9 @@
 package com.example.movie_db_app.ui
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.movie_db_app.data.database.User
 import com.example.movie_db_app.data.repository.UserRepo
-import com.example.movie_db_app.utils.constants.EMAIL
 
 class UserViewModel(
     private val userRepo: UserRepo) : ViewModel() {

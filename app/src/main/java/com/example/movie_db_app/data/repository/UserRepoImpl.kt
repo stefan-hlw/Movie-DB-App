@@ -17,7 +17,6 @@ class UserRepoImpl(private val userDao: UserDao): UserRepo {
         }
     }
 
-
     override fun editUser(user: User) {
         runBlocking {
             this.launch(Dispatchers.IO) {
@@ -29,7 +28,6 @@ class UserRepoImpl(private val userDao: UserDao): UserRepo {
     override fun getUser(email: String, password: String): LiveData<User> {
         return userDao.getUserInfo(email, password)
     }
-
 
     override fun doesUserExist(email: String): LiveData<Int> {
         return userDao.doesUserExist(email)

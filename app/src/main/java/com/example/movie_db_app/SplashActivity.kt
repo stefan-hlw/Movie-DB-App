@@ -3,7 +3,6 @@ package com.example.movie_db_app
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {
 

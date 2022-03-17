@@ -7,10 +7,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.AppDatabase
 import com.example.movie_db_app.data.remote.ServiceApi
-import com.example.movie_db_app.data.repository.MovieListRepo
-import com.example.movie_db_app.data.repository.MovieListRepoImpl
-import com.example.movie_db_app.data.repository.UserRepo
-import com.example.movie_db_app.data.repository.UserRepoImpl
+import com.example.movie_db_app.data.repository.*
 import com.example.movie_db_app.ui.MovieListViewModel
 import com.example.movie_db_app.ui.UserViewModel
 import com.example.movie_db_app.utils.constants
@@ -45,6 +42,10 @@ val applicationModule = module {
         UserRepoImpl(get())
     }
 
+    single<GenresRepo> {
+        GenresRepoImpl(get())
+    }
+
     single<MovieListRepo> {
         MovieListRepoImpl(get())
     }
@@ -54,7 +55,7 @@ val applicationModule = module {
     }
 
     viewModel {
-        MovieListViewModel(get())
+        MovieListViewModel(get(), get())
     }
 
     //Glide setup
@@ -65,15 +66,17 @@ val applicationModule = module {
             .error(R.drawable.placeholder_image)
     }
 
-    single { provideRequestOptions() }
+    single(named("RQO")) { provideRequestOptions() }
 
     fun provideGlideInstance(application: Application, requestOptions: RequestOptions): RequestManager {
         return Glide.with(application).setDefaultRequestOptions(requestOptions)
     }
 
-    single { provideGlideInstance(androidApplication() as Application, get()) }
+    single(named("GLI")) { provideGlideInstance(androidApplication() as Application, get(named("RQO"))) }
 
-    factory { GlideInstance(get()) }
+    factory {
+        GlideInstance(get(named("GLI")))
+    }
 
     // Retrofit setup
 

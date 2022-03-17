@@ -11,6 +11,7 @@ import com.example.movie_db_app.R
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.utils.constants
 
+
 class MovieListAdapter(private val context: Context,
                        private val movieList: List<MovieItemResponse>):
     RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {

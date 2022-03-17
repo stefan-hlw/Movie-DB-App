@@ -1,6 +1,7 @@
 package com.example.movie_db_app.ui.trending
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class TrendingFragment: Fragment() {
 
     fun test123() {
         movieListViewModel.getTrendingMovies()
+        movieListViewModel.getGenres()
     }
 
     fun setObservers() {
@@ -47,15 +49,16 @@ class TrendingFragment: Fragment() {
             println("INDIVIDUAL_MOVIE")
         })
 
-
+        movieListViewModel.genresData.observe(viewLifecycleOwner, Observer {
+            println(it[0])
+            println(it)
+            Log.i(it.toString(), "GENRES_LIST")
+        })
     }
+
     private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
         movieListAdapter = MovieListAdapter(requireContext(), movieList)
         view?.findViewById<RecyclerView>(R.id.rc_movies_list)?.adapter = movieListAdapter
     }
-
-
-
-
 
 }
