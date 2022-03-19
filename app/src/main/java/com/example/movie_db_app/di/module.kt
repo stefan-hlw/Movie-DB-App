@@ -31,7 +31,8 @@ val applicationModule = module {
             androidContext(),
             AppDatabase::class.java,
             "database-name"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
     single {
@@ -42,11 +43,7 @@ val applicationModule = module {
         UserRepoImpl(get())
     }
 
-    single<GenresRepo> {
-        GenresRepoImpl(get())
-    }
-
-    single<MovieListRepo> {
+    single<MoviesRepo> {
         MovieListRepoImpl(get())
     }
 
@@ -55,28 +52,28 @@ val applicationModule = module {
     }
 
     viewModel {
-        MovieListViewModel(get(), get())
+        MovieListViewModel(get())
     }
 
     //Glide setup
 
-    fun provideRequestOptions(): RequestOptions {
-        return RequestOptions
-            .placeholderOf(R.drawable.placeholder_image)
-            .error(R.drawable.placeholder_image)
-    }
-
-    single(named("RQO")) { provideRequestOptions() }
-
-    fun provideGlideInstance(application: Application, requestOptions: RequestOptions): RequestManager {
-        return Glide.with(application).setDefaultRequestOptions(requestOptions)
-    }
-
-    single(named("GLI")) { provideGlideInstance(androidApplication() as Application, get(named("RQO"))) }
-
-    factory {
-        GlideInstance(get(named("GLI")))
-    }
+//    fun provideRequestOptions(): RequestOptions {
+//        return RequestOptions
+//            .placeholderOf(R.drawable.placeholder_image)
+//            .error(R.drawable.placeholder_image)
+//    }
+//
+//    single(named("RQO")) { provideRequestOptions() }
+//
+//    fun provideGlideInstance(application: Application, requestOptions: RequestOptions): RequestManager {
+//        return Glide.with(application).setDefaultRequestOptions(requestOptions)
+//    }
+//
+//    single(named("GLI")) { provideGlideInstance(androidApplication() as Application, get(named("RQO"))) }
+//
+//    factory {
+//        GlideInstance(get(named("GLI")))
+//    }
 
     // Retrofit setup
 

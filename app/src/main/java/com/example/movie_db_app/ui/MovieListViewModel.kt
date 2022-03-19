@@ -4,15 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movie_db_app.data.remote.Genres
 import com.example.movie_db_app.data.remote.MovieItemResponse
-import com.example.movie_db_app.data.repository.GenresRepo
-import com.example.movie_db_app.data.repository.MovieListRepo
+import com.example.movie_db_app.data.repository.MoviesRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
-    private val movieListRepo: MovieListRepo,
-    private val genresRepo: GenresRepo
+    private val moviesRepo: MoviesRepo
 ) : ViewModel() {
 
     var moviesData = MutableLiveData<List<MovieItemResponse>>()
@@ -21,13 +19,13 @@ class MovieListViewModel(
 
     fun getTrendingMovies() {
         cs.launch {
-            moviesData.postValue(movieListRepo.getTrendingMovies().body()?.results!!)
+            moviesData.postValue(moviesRepo.getTrendingMovies().body()?.results!!)
         }
     }
 
     fun getGenres() {
         cs.launch {
-            genresData.postValue(genresRepo.getGenres())
+            genresData.postValue(moviesRepo.getGenres())
         }
     }
 

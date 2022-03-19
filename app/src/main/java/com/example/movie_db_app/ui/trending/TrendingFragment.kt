@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.remote.MovieItemResponse
+import com.example.movie_db_app.databinding.FragmentRegisterBinding
+import com.example.movie_db_app.databinding.FragmentTrendingBinding
 import com.example.movie_db_app.ui.MovieListAdapter
 import com.example.movie_db_app.ui.MovieListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,25 +20,31 @@ class TrendingFragment: Fragment() {
 
     private val movieListViewModel by viewModel<MovieListViewModel>()
     private var movieListAdapter: MovieListAdapter? = null
+    private var _binding: FragmentTrendingBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_trending, container, false)
+        _binding = FragmentTrendingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        test123()
+        getDataFromApi()
         setObservers()
-
     }
 
-
-    fun test123() {
+    fun getDataFromApi() {
         movieListViewModel.getTrendingMovies()
         movieListViewModel.getGenres()
     }
@@ -58,7 +66,7 @@ class TrendingFragment: Fragment() {
 
     private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
         movieListAdapter = MovieListAdapter(requireContext(), movieList)
-        view?.findViewById<RecyclerView>(R.id.rc_movies_list)?.adapter = movieListAdapter
+        binding.rcMoviesList.adapter = movieListAdapter
     }
 
 }

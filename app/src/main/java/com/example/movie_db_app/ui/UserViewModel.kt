@@ -9,10 +9,8 @@ class UserViewModel(
     private val userRepo: UserRepo) : ViewModel() {
 
 
-    fun createUser(email: String, password: String, fullName: String, birthday: String?) {
-        val user = User(null, email, password, fullName, birthday)
+    fun createUser(user: User) {
         userRepo.createUser(user)
-        print(userRepo.getUser(email, password))
     }
 
     fun editUser(user: User) {

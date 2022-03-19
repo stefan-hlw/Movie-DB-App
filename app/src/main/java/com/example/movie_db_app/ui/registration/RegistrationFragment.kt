@@ -9,13 +9,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
+import com.example.movie_db_app.data.database.User
+import com.example.movie_db_app.databinding.FragmentRegisterBinding
 import com.example.movie_db_app.ui.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -23,17 +22,25 @@ import java.util.*
 class RegistrationFragment : Fragment() {
 
     private val userViewModel: UserViewModel by viewModel()
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
 
     val cal = Calendar.getInstance()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,11 +48,11 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun registerListeners() {
-        view?.findViewById<TextView>(R.id.login_here)?.setOnClickListener{
+        binding.loginHere.setOnClickListener{
             findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
         }
 
-        view?.findViewById<Button>(R.id.register_button)?.setOnClickListener{
+        binding.registerButton.setOnClickListener{
             createUser()
             showRegistrationPopUpDialog()
         }
@@ -71,7 +78,7 @@ class RegistrationFragment : Fragment() {
         val maxDate = minCalendar.time
         val minDate = maxCalendar.time
 
-        view?.findViewById<TextView>(R.id.birthday_picker)?.setOnClickListener {
+        binding.birthdayPicker.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
                 dateSetListener,
@@ -87,18 +94,18 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun createUser() {
-        val email = view?.findViewById<EditText>(R.id.email_input)?.text.toString().trim()
-        val password = view?.findViewById<EditText>(R.id.password_input)?.text.toString().trim()
-        val fullName = view?.findViewById<EditText>(R.id.full_name_input)?.text.toString().trim()
-        val birthday = view?.findViewById<TextView>(R.id.birthday_picker)?.text.toString()
-
-        userViewModel.createUser(email, password, fullName, birthday)
+        val email = binding.emailInput.text.toString().trim()
+        val password = binding.passwordInput.text.toString().trim()
+        val fullName = binding.fullNameInput.text.toString().trim()
+        val birthday = binding.birthdayPicker.text.toString()
+        val user = User(email, password, fullName, birthday)
+        userViewModel.createUser(user)
     }
 
     private fun updateDateInView() {
         val myFormat = "dd/MM/yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        view?.findViewById<TextView>(R.id.birthday_picker)?.text = sdf.format(cal)
+        binding.birthdayPicker.text = sdf.format(cal)
     }
 
     private fun showRegistrationPopUpDialog() {
