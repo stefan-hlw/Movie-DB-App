@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="12dp">
+
+    <ImageView
+        android:id="@+id/cast_image"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:src="@color/black" />
+
+    <TextView
+        android:id="@+id/real_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6sp"
+        android:layout_marginEnd="6sp"
+        android:layout_weight="1.2"
+        android:textSize="14sp"
+        android:text="TEST MOVIE NAME"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/as"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:textSize="10sp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:text="as"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6sp"
+        android:layout_weight="1.2"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="TEST REAL NAME"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+</LinearLayout>

@@ -14,11 +14,14 @@
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/activity_splash_screen.xml" value="0.2563405797101449" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_favorites.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_genre_results.xml" value="0.1671875" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_genres.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_movie_details.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/fragment_trending.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/item_cast.xml" value="0.33" />
+        <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/item_genre.xml" value="0.5" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/layout/item_movie.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/stef-/Documents/Movie-DB-App/app/src/main/res/menu/bottom_menu.xml" value="0.36666666666666664" />
       </map>

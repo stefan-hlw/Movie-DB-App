@@ -26,13 +26,43 @@
     <fragment
         android:id="@+id/trendingFragment"
         android:name="com.example.movie_db_app.ui.trending.TrendingFragment"
-        android:label="TrendingFragment" />
+        android:label="TrendingFragment" >
+        <action
+            android:id="@+id/action_trendingFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/genresFragment"
-        android:name="com.example.movie_db_app.ui.GenresFragment"
-        android:label="GenresFragment" />
+        android:name="com.example.movie_db_app.ui.genres.GenresFragment"
+        android:label="GenresFragment" >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="Action"
+            />
+        <action
+            android:id="@+id/action_genresFragment_to_genreResultsFragment"
+            app:destination="@id/genreResultsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.movie_db_app.ui.FavoritesFragment"
         android:label="FavoritesFragment" />
+    <fragment
+        android:id="@+id/genreResultsFragment"
+        android:name="com.example.movie_db_app.ui.genreResults.GenreResultsFragment"
+        android:label="GenreResultsFragment" >
+        <action
+            android:id="@+id/action_genreResultsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.movie_db_app.ui.MovieDetails.MovieDetailsFragment"
+        android:label="MovieDetailsFragment" >
+        <argument
+            android:name="movie"
+            app:argType="com.example.movie_db_app.data.remote.MovieItemResponse"
+            app:nullable="true"/>
+    </fragment>
 </navigation>

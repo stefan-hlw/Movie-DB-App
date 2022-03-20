@@ -1,8 +1,11 @@
 package com.example.movie_db_app.data.remote
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MovieItemResponse(
     @SerializedName("adult")
     @Expose
@@ -12,7 +15,7 @@ data class MovieItemResponse(
     val backdropPath: String?,
     @SerializedName("genre_ids")
     @Expose
-    val genreIds: List<Int>?,
+    var genreIds: List<String?>?,
     @SerializedName("id")
     @Expose
     val id: Int?,
@@ -46,4 +49,4 @@ data class MovieItemResponse(
     @SerializedName("vote_count")
     @Expose
     val voteCount: Int?
-)
+): Parcelable

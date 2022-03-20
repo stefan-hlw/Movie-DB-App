@@ -6,7 +6,8 @@ import com.example.movie_db_app.data.database.User
 import com.example.movie_db_app.data.repository.UserRepo
 
 class UserViewModel(
-    private val userRepo: UserRepo) : ViewModel() {
+    private val userRepo: UserRepo
+) : ViewModel() {
 
 
     fun createUser(user: User) {

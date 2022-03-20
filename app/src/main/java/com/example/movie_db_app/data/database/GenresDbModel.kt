@@ -1,15 +1,17 @@
-package com.example.movie_db_app.data.remote
+package com.example.movie_db_app.data.database
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Genres (
-
+@Entity(tableName = "genres")
+data class GenresDbModel (
+    @PrimaryKey
     @SerializedName("id"   )
     @Expose
-    var id   : String?    = null,
+    var id   : Int,
     @SerializedName("name" )
     @Expose
     var name : String? = null
-
 )

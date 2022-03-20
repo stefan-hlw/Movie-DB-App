@@ -1,12 +1,12 @@
 package com.example.movie_db_app.data.repository
 
-import com.example.movie_db_app.data.remote.Genres
-import com.example.movie_db_app.data.remote.MovieListResponse
-import com.example.movie_db_app.data.remote.ServiceApi
+import com.example.movie_db_app.data.database.GenresDbModel
+import com.example.movie_db_app.data.database.MovieDao
+import com.example.movie_db_app.data.remote.*
 import retrofit2.Response
 
-class MovieListRepoImpl(
-    private val serviceApi: ServiceApi): MoviesRepo {
+class MoviesRepoImpl(
+    private val serviceApi: ServiceApi, private val movieDao: MovieDao): MoviesRepo {
 
     override suspend fun getTrendingMovies(): Response<MovieListResponse> {
         return serviceApi.getTrendingMovies()
@@ -15,5 +15,24 @@ class MovieListRepoImpl(
     override suspend fun getGenres(): List<Genres> {
         return serviceApi.getGenres().body()?.genres!!
     }
+
+    override suspend fun getCast(movieId: Int): ArrayList<Cast>? {
+        return serviceApi.getCast(movieId).body()?.cast
+    }
+
+    override suspend fun getSearchCategoryMovies(category: String): Response<MovieListResponse> {
+        return serviceApi.getSearchCategoryMovies(category)
+    }
+
+    override suspend fun getGenresFromDb(): List<GenresDbModel> {
+        return movieDao.getGenresFromDb()
+    }
+
+    override suspend fun insertGenre(genre: GenresDbModel) {
+        movieDao.insertGenres(genre)
+    }
+
+
+
 
 }

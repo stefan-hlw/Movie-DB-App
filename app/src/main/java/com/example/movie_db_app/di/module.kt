@@ -1,21 +1,19 @@
 package com.example.movie_db_app.di
 
 import androidx.room.Room
-import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
-import com.bumptech.glide.request.RequestOptions
-import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.AppDatabase
 import com.example.movie_db_app.data.remote.ServiceApi
 import com.example.movie_db_app.data.repository.*
-import com.example.movie_db_app.ui.MovieListViewModel
+import com.example.movie_db_app.ui.MovieDetails.MovieDetailsViewModel
+import com.example.movie_db_app.ui.trending.TrendingViewModel
 import com.example.movie_db_app.ui.UserViewModel
-import com.example.movie_db_app.utils.constants
+import com.example.movie_db_app.ui.genreResults.GenreResultsViewModel
+import com.example.movie_db_app.ui.genres.GenresViewModel
+import com.example.movie_db_app.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -38,13 +36,16 @@ val applicationModule = module {
     single {
         get<AppDatabase>().userDao()
     }
+    single {
+        get<AppDatabase>().movieDao()
+    }
 
     factory<UserRepo> {
         UserRepoImpl(get())
     }
 
     single<MoviesRepo> {
-        MovieListRepoImpl(get())
+        MoviesRepoImpl(get(), get())
     }
 
     viewModel {
@@ -52,28 +53,20 @@ val applicationModule = module {
     }
 
     viewModel {
-        MovieListViewModel(get())
+        TrendingViewModel(get())
     }
 
-    //Glide setup
+    viewModel {
+        GenresViewModel(get())
+    }
 
-//    fun provideRequestOptions(): RequestOptions {
-//        return RequestOptions
-//            .placeholderOf(R.drawable.placeholder_image)
-//            .error(R.drawable.placeholder_image)
-//    }
-//
-//    single(named("RQO")) { provideRequestOptions() }
-//
-//    fun provideGlideInstance(application: Application, requestOptions: RequestOptions): RequestManager {
-//        return Glide.with(application).setDefaultRequestOptions(requestOptions)
-//    }
-//
-//    single(named("GLI")) { provideGlideInstance(androidApplication() as Application, get(named("RQO"))) }
-//
-//    factory {
-//        GlideInstance(get(named("GLI")))
-//    }
+    viewModel {
+        GenreResultsViewModel(get())
+    }
+
+    viewModel {
+        MovieDetailsViewModel(get())
+    }
 
     // Retrofit setup
 
@@ -98,14 +91,14 @@ val applicationModule = module {
         val httpClient = OkHttpClient.Builder().addInterceptor {
             val oldReq = it.request()
             val newUrl = oldReq.url.newBuilder()
-                .addQueryParameter("api_key", constants.API_KEY)
+                .addQueryParameter("api_key", Constants.API_KEY)
                 .build()
             val newReq = oldReq.newBuilder().url(newUrl).build()
             it.proceed(newReq)
         }.addInterceptor(logging).build()
 
         return Retrofit.Builder()
-            .baseUrl(constants.BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .client(httpClient)
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))

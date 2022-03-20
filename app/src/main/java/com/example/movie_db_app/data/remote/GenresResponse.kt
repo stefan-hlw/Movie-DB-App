@@ -8,5 +8,4 @@ data class GenresResponse (
     @SerializedName("genres" )
     @Expose
     var genres : List<Genres> = listOf()
-
 )

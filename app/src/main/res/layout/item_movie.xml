@@ -6,8 +6,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="12dp"
     android:layout_margin="8dp"
-    app:cardElevation="0dp">
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="#2B2B40"
+    >
     <LinearLayout
+        android:id="@+id/card_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -17,7 +20,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            >
 
             <ImageView
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +41,6 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-
 
             <TextView
                 android:id="@+id/rating"
@@ -62,9 +65,11 @@
             android:textAlignment="textStart"
             tools:text="Title"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
             android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/genre"
+            android:background="#2B2B40"
             />
         <TextView
             android:id="@+id/genre"
@@ -76,9 +81,10 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="4dp"
             android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@+id/card_linear"
+            app:layout_constraintTop_toBottomOf="@+id/card_linear"
             tools:text="Genre"
             />
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 
