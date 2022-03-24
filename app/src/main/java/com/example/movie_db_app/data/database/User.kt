@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 
 @Entity(tableName = "user")
-data class User(@PrimaryKey
-                @ColumnInfo(name = "email"      ) val email:        String,
-                @ColumnInfo(name = "password"   ) val password:     String,
-                @ColumnInfo(name = "full_name"  ) val full_name:    String,
-                @ColumnInfo(name = "birthday"   ) val birthday:     String?,
+data class User(
+    @PrimaryKey
+    @ColumnInfo(name = "email") val email: String,
+    @ColumnInfo(name = "password") val password: String,
+    @ColumnInfo(name = "full_name") val full_name: String,
+    @ColumnInfo(name = "birthday") val birthday: String?,
 )

@@ -18,4 +18,5 @@ interface ServiceApi {
 
     @GET("/3/movie/{movieId}/credits")
     suspend fun getCast(@Path("movieId")movieId: Int): Response<CastResponse>
+
 }

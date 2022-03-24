@@ -16,6 +16,10 @@ class MoviesRepoImpl(
         return serviceApi.getGenres().body()?.genres!!
     }
 
+    override suspend fun getGenresFromDb(): List<GenresDbModel> {
+        return movieDao.getGenresFromDb()
+    }
+
     override suspend fun getCast(movieId: Int): ArrayList<Cast>? {
         return serviceApi.getCast(movieId).body()?.cast
     }
@@ -24,15 +28,12 @@ class MoviesRepoImpl(
         return serviceApi.getSearchCategoryMovies(category)
     }
 
-    override suspend fun getGenresFromDb(): List<GenresDbModel> {
-        return movieDao.getGenresFromDb()
-    }
+
 
     override suspend fun insertGenre(genre: GenresDbModel) {
         movieDao.insertGenres(genre)
     }
 
-
-
+    // local private val TRENDING_MOVIES_CACHE for storing api response
 
 }

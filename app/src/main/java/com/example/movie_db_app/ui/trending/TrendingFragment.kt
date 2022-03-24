@@ -58,7 +58,7 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     }
 
     private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
-        movieListAdapter = MovieListAdapter(requireContext(), movieList)
+        movieListAdapter = MovieListAdapter(movieList)
         movieListAdapter?.setOnItemClickListener(this)
         binding.rcMoviesList.adapter = movieListAdapter
     }

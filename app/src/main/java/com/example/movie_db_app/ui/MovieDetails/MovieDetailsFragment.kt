@@ -64,7 +64,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun setMovieDetailsAdapter(castList: ArrayList<Cast>) {
-        movieDetailsAdapter = MovieDetailsAdapter(requireContext(), castList)
+        movieDetailsAdapter = MovieDetailsAdapter(castList)
         binding.rcCast.adapter = movieDetailsAdapter
     }
 }

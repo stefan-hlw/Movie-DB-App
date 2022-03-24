@@ -13,8 +13,8 @@ import com.example.movie_db_app.databinding.ItemCastBinding
 import com.example.movie_db_app.utils.Constants
 import java.util.ArrayList
 
-class MovieDetailsAdapter(private val context :Context,
-                          private val castList:ArrayList<Cast>) : RecyclerView.Adapter<MovieDetailsAdapter.ViewHolder>() {
+class MovieDetailsAdapter(private val castList: ArrayList<Cast>) :
+    RecyclerView.Adapter<MovieDetailsAdapter.ViewHolder>() {
 
     private var _binding: ItemCastBinding? = null
     private val binding get() = _binding!!
@@ -26,7 +26,8 @@ class MovieDetailsAdapter(private val context :Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_resources)
+        val animation: Animation =
+            AnimationUtils.loadAnimation(binding.root.context, R.anim.animation_resources)
         holder.itemView.startAnimation(animation)
         holder.bindView(castList[position])
     }
@@ -38,13 +39,15 @@ class MovieDetailsAdapter(private val context :Context,
     inner class ViewHolder(private val binding: ItemCastBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(cast: Cast) {
-            binding.realName.text = cast.originalName
-            binding.movieName.text = cast.character
-            Glide.with(context)
-                .load(Constants.IMAGE_BASE_URL + cast.profilePath)
-                .placeholder(R.drawable.placeholder_image)
-                .error(R.drawable.placeholder_image)
-                .into(binding.castImage)
+            with(binding) {
+                realName.text = cast.originalName
+                movieName.text = cast.character
+                Glide.with(root.context)
+                    .load(Constants.IMAGE_BASE_URL + cast.profilePath)
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.placeholder_image)
+                    .into(castImage)
+            }
         }
     }
 }

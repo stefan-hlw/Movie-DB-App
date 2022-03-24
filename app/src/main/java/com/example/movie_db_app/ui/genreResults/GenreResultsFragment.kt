@@ -65,7 +65,7 @@ class GenreResultsFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     }
 
     private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
-        movieListAdapter = MovieListAdapter(requireContext(), movieList)
+        movieListAdapter = MovieListAdapter(movieList)
         movieListAdapter?.setOnItemClickListener(this)
         binding.rcCategoryMoviesList.adapter = movieListAdapter
     }
