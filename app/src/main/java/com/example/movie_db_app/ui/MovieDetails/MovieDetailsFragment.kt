@@ -1,6 +1,7 @@
 package com.example.movie_db_app.ui.MovieDetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class MovieDetailsFragment : Fragment() {
     private fun populateUI() {
         val movie = MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
         binding.title.text = movie?.title
+        Log.i(movie?.title, "MOVIE_TITLE")
         binding.expandTextView.text = movie?.overview
         binding.genres.text = movie?.genreIds.toString().drop(1).dropLast(1)
         binding.rating.text = movie?.voteAverage.toString()

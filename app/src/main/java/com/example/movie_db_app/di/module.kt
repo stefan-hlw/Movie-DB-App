@@ -7,6 +7,7 @@ import com.example.movie_db_app.data.repository.*
 import com.example.movie_db_app.ui.MovieDetails.MovieDetailsViewModel
 import com.example.movie_db_app.ui.trending.TrendingViewModel
 import com.example.movie_db_app.ui.UserViewModel
+import com.example.movie_db_app.ui.editProfile.ProfileViewModel
 import com.example.movie_db_app.ui.genreResults.GenreResultsViewModel
 import com.example.movie_db_app.ui.genres.GenresViewModel
 import com.example.movie_db_app.utils.Constants
@@ -40,7 +41,7 @@ val applicationModule = module {
         get<AppDatabase>().movieDao()
     }
 
-    factory<UserRepo> {
+    single<UserRepo> {
         UserRepoImpl(get())
     }
 
@@ -66,6 +67,10 @@ val applicationModule = module {
 
     viewModel {
         MovieDetailsViewModel(get())
+    }
+
+    viewModel {
+        ProfileViewModel(get())
     }
 
     // Retrofit setup

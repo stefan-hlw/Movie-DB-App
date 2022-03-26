@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_trendingFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_trendingFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/genresFragment"
@@ -43,11 +46,18 @@
         <action
             android:id="@+id/action_genresFragment_to_genreResultsFragment"
             app:destination="@id/genreResultsFragment" />
+        <action
+            android:id="@+id/action_genresFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.movie_db_app.ui.FavoritesFragment"
-        android:label="FavoritesFragment" />
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/genreResultsFragment"
         android:name="com.example.movie_db_app.ui.genreResults.GenreResultsFragment"
@@ -55,6 +65,9 @@
         <action
             android:id="@+id/action_genreResultsFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_genreResultsFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -65,4 +78,8 @@
             app:argType="com.example.movie_db_app.data.remote.MovieItemResponse"
             app:nullable="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.movie_db_app.ui.editProfile.ProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>

@@ -41,6 +41,8 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
         trendingViewModel.getGenresFromApi()
         trendingViewModel.getTrendingMovies()
+
+        setActionBar()
         setObservers()
     }
 
@@ -50,6 +52,13 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
             setMovieListAdapter(it)
             movieListAdapter?.notifyDataSetChanged()
         })
+    }
+
+    private fun setActionBar() {
+        binding.actionBarTrending.profileIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_trendingFragment_to_editProfileFragment)
+        }
+        binding.actionBarTrending.actionBarTopText.text = getString(R.string.trending)
     }
 
     override fun openMovie(movie: MovieItemResponse) {

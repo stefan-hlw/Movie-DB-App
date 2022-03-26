@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -51,24 +53,18 @@ class LoginFragment : Fragment() {
     private fun login() {
         val email = binding.emailInput.text.toString().trim()
         val password = binding.passwordInput.text.toString().trim()
-        // TODO 1. hash password
-        //      2. replace doesUserExist with get user and save the currently logged user in SharedPreferences
-        //      3. Display Error message based on what's wrong
-        //              case 1 -> user doesn't exist
-        //              case 2 -> password is wrong
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            userViewModel.doesUserExist(email).observe(viewLifecycleOwner, Observer {
-                if (it > 0) {
+            userViewModel.getUser(email, password).observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    userViewModel.setCurrentUser(it.email)
                     findNavController().navigate(R.id.action_loginFragment_to_trendingFragment)
+                } else {
+                    Toast.makeText(requireContext(),"Invalid credentials", Toast.LENGTH_SHORT).show()
                 }
             })
         }
     }
-
-    // TODO Add user to shared preferences(already done something in viewModel
-    //      add log for checking shared preferences
-
 
 }
 

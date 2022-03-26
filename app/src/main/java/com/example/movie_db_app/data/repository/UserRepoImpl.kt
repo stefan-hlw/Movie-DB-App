@@ -9,6 +9,8 @@ import kotlinx.coroutines.runBlocking
 
 class UserRepoImpl(private val userDao: UserDao): UserRepo {
 
+    override var CURRENT_USER: String? = null
+
     override fun createUser(user: User) {
         runBlocking {
             this.launch(Dispatchers.IO) {
@@ -25,11 +27,12 @@ class UserRepoImpl(private val userDao: UserDao): UserRepo {
         }
     }
 
-    override fun getUser(email: String, password: String): LiveData<User> {
+    override fun getUser(email: String, password: String): LiveData<User?> {
         return userDao.getUserInfo(email, password)
     }
 
-    override fun doesUserExist(email: String): LiveData<Int> {
-        return userDao.doesUserExist(email)
+
+    override fun getUserProfile(email: String?): LiveData<User?> {
+        return userDao.getUserProfile(email)
     }
 }

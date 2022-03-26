@@ -1,6 +1,5 @@
 package com.example.movie_db_app.ui.MovieDetails
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -18,7 +17,6 @@ class MovieDetailsAdapter(private val castList: ArrayList<Cast>) :
 
     private var _binding: ItemCastBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         _binding = ItemCastBinding.inflate(LayoutInflater.from(parent.context), parent, false)

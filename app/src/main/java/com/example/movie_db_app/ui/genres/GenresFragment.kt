@@ -40,6 +40,7 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setActionBarTop()
         setObservers()
         getData()
     }
@@ -53,6 +54,14 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
             setGenreListAdapter(it)
             genreAdapter?.notifyDataSetChanged()
         })
+    }
+
+    private fun setActionBarTop() {
+        binding.actionBarGenres.actionBarTopText.text = getString(R.string.genres)
+        binding.actionBarGenres.profileIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_genresFragment_to_editProfileFragment)
+        }
+
     }
 
     override fun openCategory(category: String) {

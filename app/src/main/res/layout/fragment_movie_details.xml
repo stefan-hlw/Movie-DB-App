@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient_dark_purple"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,6 +13,7 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
+            android:background="@drawable/gradient_dark_purple_reverse"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:expandedTitleMarginBottom="24sp"
@@ -133,7 +135,7 @@
         android:id="@+id/rc_cast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:background="@drawable/gradient_dark_purple"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,5 +143,4 @@
         app:spanCount="1"
         tools:listitem="@layout/item_cast" />
 
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>&lt;!&ndash;    </androidx.core.widget.NestedScrollView>&ndash;&gt;-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

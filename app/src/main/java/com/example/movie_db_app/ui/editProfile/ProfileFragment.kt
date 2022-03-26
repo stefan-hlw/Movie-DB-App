@@ -1,7 +1,6 @@
-package com.example.movie_db_app.ui.registration
+package com.example.movie_db_app.ui.editProfile
 
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -9,21 +8,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Observer
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.User
-import com.example.movie_db_app.databinding.FragmentRegisterBinding
-import com.example.movie_db_app.ui.UserViewModel
+import com.example.movie_db_app.databinding.FragmentProfileBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class RegistrationFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private val userViewModel: UserViewModel by viewModel()
-    private var _binding: FragmentRegisterBinding? = null
+    private val profileViewModel: ProfileViewModel by viewModel()
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var uneditedUser: User
 
     val cal = Calendar.getInstance()
 
@@ -32,7 +30,7 @@ class RegistrationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,17 +42,25 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        registerListeners()
+        setObservers()
+        setListeners()
     }
 
-    private fun registerListeners() {
-        binding.loginHere.setOnClickListener{
-            findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
-        }
+    private fun setObservers() {
+        profileViewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
+            with(binding) {
+                uneditedUser = User(it!!.email, it.password, it.full_name, it.birthday)
+                emailInput.setText(it.email)
+                passwordInput.setText(it.password)
+                fullNameInput.setText(it.full_name)
+                birthdayText.text = it.birthday
+            }
+        })
+    }
 
-        binding.registerButton.setOnClickListener{
-            createUser()
-            showRegistrationPopUpDialog()
+    private fun setListeners() {
+        binding.editProfileButton.setOnClickListener {
+            editUser()
         }
 
         val minCalendar = Calendar.getInstance()
@@ -91,15 +97,20 @@ class RegistrationFragment : Fragment() {
                 show()
             }
         }
+
     }
 
-    private fun createUser() {
-        val email = binding.emailInput.text.toString().trim()
-        val password = binding.passwordInput.text.toString().trim()
-        val fullName = binding.fullNameInput.text.toString().trim()
-        val birthday = binding.birthdayPicker.text.toString()
-        val user = User(email, password, fullName, birthday)
-        userViewModel.createUser(user)
+    private fun editUser() {
+        with(binding) {
+            val birthday: String = if (birthdayPicker.text.toString() == getString(R.string.birthday_picker)) {
+                uneditedUser.birthday.toString()
+            } else {
+                birthdayPicker.text.toString()
+            }
+            val editedUser = User(emailInput.text.toString(), passwordInput.text.toString(), fullNameInput.text.toString(), birthday)
+            profileViewModel.editUser(editedUser)
+        }
+
     }
 
     private fun updateDateInView() {
@@ -108,17 +119,4 @@ class RegistrationFragment : Fragment() {
         binding.birthdayPicker.text = sdf.format(cal)
     }
 
-    private fun showRegistrationPopUpDialog() {
-        val dialogBuilder = AlertDialog.Builder(context!!)
-        dialogBuilder.setMessage("The user has been successfully created, you will be redirected to login page")
-        dialogBuilder.setPositiveButton("Ok",
-            DialogInterface.OnClickListener { dialog, whichButton ->
-                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
-            })
-        val b = dialogBuilder.create()
-        b.show()
-    }
-
-
 }
-

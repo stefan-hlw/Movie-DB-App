@@ -15,9 +15,9 @@ interface UserDao {
     suspend fun editUser(user: User)
 
     @Query("SELECT * FROM user WHERE email= :email AND password= :password")
-    fun getUserInfo(email: String, password: String): LiveData<User>
+    fun getUserInfo(email: String, password: String): LiveData<User?>
 
-    @Query("SELECT COUNT(*) FROM user WHERE email = :email")
-    fun doesUserExist(email: String): LiveData<Int>
+    @Query("SELECT * FROM user WHERE email= :email")
+    fun getUserProfile(email: String?): LiveData<User?>
 
 }
