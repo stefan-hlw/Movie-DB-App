@@ -3,7 +3,6 @@ package com.example.movie_db_app.data.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDate
 
 @Entity(tableName = "user")
 data class User(

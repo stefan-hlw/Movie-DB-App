@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.movie_db_app.ui.FavoritesFragment"
+        android:name="com.example.movie_db_app.ui.favorites.FavoritesFragment"
         android:label="FavoritesFragment" >
         <action
             android:id="@+id/action_favoritesFragment_to_editProfileFragment"

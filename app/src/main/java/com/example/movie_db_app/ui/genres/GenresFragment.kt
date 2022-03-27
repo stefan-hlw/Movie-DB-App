@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.GenresDbModel
 import com.example.movie_db_app.databinding.FragmentGenresBinding
-import com.example.movie_db_app.ui.MovieListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
@@ -27,7 +25,7 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentGenresBinding.inflate(inflater, container, false)
         return binding.root
     }

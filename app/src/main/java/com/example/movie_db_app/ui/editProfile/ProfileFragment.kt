@@ -23,13 +23,13 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var uneditedUser: User
 
-    val cal = Calendar.getInstance()
+    private val cal = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }

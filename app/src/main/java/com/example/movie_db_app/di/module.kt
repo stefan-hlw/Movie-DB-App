@@ -8,6 +8,7 @@ import com.example.movie_db_app.ui.MovieDetails.MovieDetailsViewModel
 import com.example.movie_db_app.ui.trending.TrendingViewModel
 import com.example.movie_db_app.ui.UserViewModel
 import com.example.movie_db_app.ui.editProfile.ProfileViewModel
+import com.example.movie_db_app.ui.favorites.FavoritesViewModel
 import com.example.movie_db_app.ui.genreResults.GenreResultsViewModel
 import com.example.movie_db_app.ui.genres.GenresViewModel
 import com.example.movie_db_app.utils.Constants
@@ -66,11 +67,15 @@ val applicationModule = module {
     }
 
     viewModel {
-        MovieDetailsViewModel(get())
+        MovieDetailsViewModel(get(), get())
     }
 
     viewModel {
         ProfileViewModel(get())
+    }
+
+    viewModel {
+        FavoritesViewModel(get(), get())
     }
 
     // Retrofit setup

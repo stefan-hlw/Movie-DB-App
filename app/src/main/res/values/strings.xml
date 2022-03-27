@@ -8,6 +8,7 @@
     <string name="edit_profile_top_text">Profile</string>
     <string name="full_name_text">Full Name</string>
     <string name="trending">Trending</string>
+    <string name="favorites">Favorites</string>
     <string name="genres">Genres</string>
     <string name="as">as</string>
     <string name="birthday_text">Date of birth</string>
@@ -16,5 +17,4 @@
     <string name="already_have_account">Already have an account? Login</string>
     <string name="here">here</string>
     <string name ="ScrollingViewBehavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-
 </resources>

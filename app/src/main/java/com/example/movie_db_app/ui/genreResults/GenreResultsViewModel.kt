@@ -2,7 +2,6 @@ package com.example.movie_db_app.ui.genreResults
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movie_db_app.data.database.GenresDbModel
 import com.example.movie_db_app.data.remote.Genres
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.data.repository.MoviesRepo
@@ -16,7 +15,7 @@ class GenreResultsViewModel(
 
     var moviesData = MutableLiveData<List<MovieItemResponse>>()
     var genres = MutableLiveData<List<Genres>?>()
-    var genresMap = MutableLiveData<Map<String, String?>>()
+    private var genresMap = MutableLiveData<Map<String, String?>>()
 
     private val cs = CoroutineScope(Dispatchers.IO)
 

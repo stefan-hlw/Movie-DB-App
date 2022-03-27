@@ -1,7 +1,6 @@
 package com.example.movie_db_app.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 

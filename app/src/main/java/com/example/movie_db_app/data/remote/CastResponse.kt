@@ -3,111 +3,113 @@ package com.example.movie_db_app.data.remote
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class CastResponse (
-    @SerializedName("id"   )
+data class CastResponse(
+    @SerializedName("id")
     @Expose
-    var id   : Int?            = null,
+    var id: Int? = null,
 
-    @SerializedName("cast" )
+    @SerializedName("cast")
     @Expose
-    var cast : ArrayList<Cast> = arrayListOf(),
+    var cast: ArrayList<Cast> = arrayListOf(),
 
-    @SerializedName("crew" )
+    @SerializedName("crew")
     @Expose
-    var crew : ArrayList<Crew> = arrayListOf()
+    var crew: ArrayList<Crew> = arrayListOf()
 )
-data class Cast (
-    @SerializedName("adult"                )
-    @Expose
-    var adult              : Boolean? = null,
 
-    @SerializedName("gender"               )
+data class Cast(
+    @SerializedName("adult")
     @Expose
-    var gender             : Int?     = null,
+    var adult: Boolean? = null,
 
-    @SerializedName("id"                   )
+    @SerializedName("gender")
     @Expose
-    var id                 : Int?     = null,
+    var gender: Int? = null,
 
-    @SerializedName("known_for_department" )
+    @SerializedName("id")
     @Expose
-    var knownForDepartment : String?  = null,
+    var id: Int? = null,
 
-    @SerializedName("name"                 )
+    @SerializedName("known_for_department")
     @Expose
-    var name               : String?  = null,
+    var knownForDepartment: String? = null,
 
-    @SerializedName("original_name"        )
+    @SerializedName("name")
     @Expose
-    var originalName       : String?  = null,
+    var name: String? = null,
 
-    @SerializedName("popularity"           )
+    @SerializedName("original_name")
     @Expose
-    var popularity         : Double?  = null,
+    var originalName: String? = null,
 
-    @SerializedName("profile_path"         )
+    @SerializedName("popularity")
     @Expose
-    var profilePath        : String?  = null,
+    var popularity: Double? = null,
 
-    @SerializedName("cast_id"              )
+    @SerializedName("profile_path")
     @Expose
-    var castId             : Int?     = null,
-    @SerializedName("character"            )
-    @Expose
-    var character          : String?  = null,
+    var profilePath: String? = null,
 
-    @SerializedName("credit_id"            )
+    @SerializedName("cast_id")
     @Expose
-    var creditId           : String?  = null,
+    var castId: Int? = null,
+    @SerializedName("character")
+    @Expose
+    var character: String? = null,
 
-    @SerializedName("order"                )
+    @SerializedName("credit_id")
     @Expose
-    var order              : Int?     = null
+    var creditId: String? = null,
+
+    @SerializedName("order")
+    @Expose
+    var order: Int? = null
 )
-data class Crew (
 
-    @SerializedName("adult"                )
-    @Expose
-    var adult              : Boolean? = null,
+data class Crew(
 
-    @SerializedName("gender"               )
+    @SerializedName("adult")
     @Expose
-    var gender             : Int?     = null,
+    var adult: Boolean? = null,
 
-    @SerializedName("id"                   )
+    @SerializedName("gender")
     @Expose
-    var id                 : Int?     = null,
+    var gender: Int? = null,
 
-    @SerializedName("known_for_department" )
+    @SerializedName("id")
     @Expose
-    var knownForDepartment : String?  = null,
+    var id: Int? = null,
 
-    @SerializedName("name"                 )
+    @SerializedName("known_for_department")
     @Expose
-    var name               : String?  = null,
+    var knownForDepartment: String? = null,
 
-    @SerializedName("original_name"        )
+    @SerializedName("name")
     @Expose
-    var originalName       : String?  = null,
+    var name: String? = null,
 
-    @SerializedName("popularity"           )
+    @SerializedName("original_name")
     @Expose
-    var popularity         : Double?  = null,
+    var originalName: String? = null,
 
-    @SerializedName("profile_path"         )
+    @SerializedName("popularity")
     @Expose
-    var profilePath        : String?  = null,
+    var popularity: Double? = null,
 
-    @SerializedName("credit_id"            )
+    @SerializedName("profile_path")
     @Expose
-    var creditId           : String?  = null,
+    var profilePath: String? = null,
 
-    @SerializedName("department"           )
+    @SerializedName("credit_id")
     @Expose
-    var department         : String?  = null,
+    var creditId: String? = null,
 
-    @SerializedName("job"                  )
+    @SerializedName("department")
     @Expose
-    var job                : String?  = null
+    var department: String? = null,
+
+    @SerializedName("job")
+    @Expose
+    var job: String? = null
 
 )

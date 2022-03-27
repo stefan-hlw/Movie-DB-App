@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Movie(@PrimaryKey(autoGenerate = false)
                  @ColumnInfo(name = "id"                    ) val id                  : Int?                           = null,
                  @ColumnInfo(name = "backdrop_path"         ) val backdropPath        : String?                        = null,
-                 @ColumnInfo(name = "genres"                ) val genres              : List<Int>                      = arrayListOf(),
+                 @ColumnInfo(name = "genres"                ) val genres              : String?                        = null,
                  @ColumnInfo(name = "overview"              ) val overview            : String?                        = null,
                  @ColumnInfo(name = "poster_path"           ) val posterPath          : String?                        = null,
                  @ColumnInfo(name = "title"                 ) val title               : String?                        = null,

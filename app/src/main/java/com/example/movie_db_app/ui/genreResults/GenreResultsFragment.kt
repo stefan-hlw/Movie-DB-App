@@ -11,11 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.databinding.FragmentGenreResultsBinding
-import com.example.movie_db_app.databinding.FragmentGenresBinding
-import com.example.movie_db_app.databinding.FragmentTrendingBinding
 import com.example.movie_db_app.ui.MovieListAdapter
 import com.example.movie_db_app.ui.genres.GenresFragmentArgs
-import com.example.movie_db_app.ui.trending.TrendingFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenreResultsFragment : Fragment(), MovieListAdapter.OnItemClickListener {
@@ -29,7 +26,7 @@ class GenreResultsFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentGenreResultsBinding.inflate(inflater, container, false)
         return binding.root
     }

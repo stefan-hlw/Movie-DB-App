@@ -1,24 +1,23 @@
-package com.example.movie_db_app.ui.trending
+package com.example.movie_db_app.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.remote.MovieItemResponse
-import com.example.movie_db_app.databinding.FragmentTrendingBinding
+import com.example.movie_db_app.databinding.FragmentFavoritesBinding
 import com.example.movie_db_app.ui.MovieListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
+class FavoritesFragment : Fragment() {
 
-    private val trendingViewModel by viewModel<TrendingViewModel>()
+    private val favoritesViewModel by viewModel<FavoritesViewModel>()
     private var movieListAdapter: MovieListAdapter? = null
-    private var _binding: FragmentTrendingBinding? = null
+    private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,7 +25,7 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTrendingBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,38 +36,31 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        trendingViewModel.getGenresFromApi()
-        trendingViewModel.getTrendingMovies()
-
         setActionBar()
+
+        favoritesViewModel.getFavoriteMovies()
         setObservers()
     }
 
     private fun setObservers() {
-        trendingViewModel.moviesData.observe(viewLifecycleOwner, Observer {
-            trendingViewModel.convertGenreIdsToNames(it)
-            setMovieListAdapter(it)
-            movieListAdapter?.notifyDataSetChanged()
+        favoritesViewModel.moviesData.observe(viewLifecycleOwner, Observer {
+            println(it)
+            println("FAVORITE_MOVIE_DATA")
         })
     }
 
     private fun setActionBar() {
-        binding.actionBarTrending.profileIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_trendingFragment_to_editProfileFragment)
+        binding.actionBarFavorites.profileIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_favoritesFragment_to_editProfileFragment)
         }
-        binding.actionBarTrending.actionBarTopText.text = getString(R.string.trending)
-    }
-
-    override fun openMovie(movie: MovieItemResponse) {
-        val bundle = bundleOf("movie" to movie)
-        findNavController().navigate(R.id.action_trendingFragment_to_movieDetailsFragment, bundle)
+        binding.actionBarFavorites.actionBarTopText.text = getString(R.string.favorites)
     }
 
     private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
         movieListAdapter = MovieListAdapter(movieList)
-        movieListAdapter?.setOnItemClickListener(this)
+//        movieListAdapter?.setOnItemClickListener(this)
         binding.rcMoviesList.adapter = movieListAdapter
     }
 
+    // TODO Figure out what to do with MovieItemResponse and Movie, rn creating another Adapter seems like the best solution
 }

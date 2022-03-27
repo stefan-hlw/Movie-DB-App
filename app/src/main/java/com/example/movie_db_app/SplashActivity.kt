@@ -8,7 +8,7 @@ import kotlinx.coroutines.*
 class SplashActivity : AppCompatActivity() {
 
 
-    val activityScope = CoroutineScope(Dispatchers.Main)
+    private val activityScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         activityScope.launch {
             delay(3000)
 
-            var intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -27,6 +27,4 @@ class SplashActivity : AppCompatActivity() {
         activityScope.cancel()
         super.onPause()
     }
-
-    // TODO Add all required formats for splash image according to guidelines
 }

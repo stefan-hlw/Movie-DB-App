@@ -3,7 +3,7 @@ package com.example.movie_db_app.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [User::class, GenresDbModel::class], version = 3, exportSchema = false)
+@Database(entities = [User::class, GenresDbModel::class, Movie::class, MovieFavorite::class], version = 6, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

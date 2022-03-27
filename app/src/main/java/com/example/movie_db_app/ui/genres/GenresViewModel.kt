@@ -3,7 +3,6 @@ package com.example.movie_db_app.ui.genres
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movie_db_app.data.database.GenresDbModel
-import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.data.repository.MoviesRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

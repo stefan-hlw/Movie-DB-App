@@ -9,15 +9,14 @@ import com.example.movie_db_app.data.repository.MoviesRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class TrendingViewModel(
     private val moviesRepo: MoviesRepo
 ) : ViewModel() {
 
     var moviesData = MutableLiveData<List<MovieItemResponse>>()
-    var genresData = MutableLiveData<List<Genres>?>()
-    var genresMap = MutableLiveData<Map<String?, String?>>()
+    private var genresData = MutableLiveData<List<Genres>?>()
+    private var genresMap = MutableLiveData<Map<String?, String?>>()
 
     private val cs = CoroutineScope(Dispatchers.IO)
 
