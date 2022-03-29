@@ -44,7 +44,7 @@
                     android:layout_width="40sp"
                     android:layout_height="40sp"
                     android:id="@+id/favorite"
-                    android:src="@drawable/ic_star_round"
+                    android:src="@drawable/ic_star_outline"
                     app:layout_constraintEnd_toEndOf="@id/iv_backdrop"
                     app:layout_constraintTop_toBottomOf="@id/iv_backdrop"
                     app:layout_constraintBottom_toBottomOf="@id/iv_backdrop"

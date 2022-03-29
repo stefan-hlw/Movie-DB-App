@@ -11,12 +11,14 @@ import kotlinx.coroutines.launch
 
 class FavoritesViewModel(private val moviesRepo: MoviesRepo, private val userRepo: UserRepo) : ViewModel() {
 
-    var moviesData = MutableLiveData<List<Movie>>()
+    var moviesData = MutableLiveData<List<Movie?>?>()
     private val cs = CoroutineScope(Dispatchers.IO)
 
-    fun getFavoriteMovies() {
+    fun getAllFavoriteMovies() {
         cs.launch {
-            moviesData.postValue(moviesRepo.getFavoriteMovies(userRepo.CURRENT_USER!!))
+            moviesData.postValue(moviesRepo.getAllFavoriteMovies(userRepo.CURRENT_USER!!))
         }
     }
+
+
 }

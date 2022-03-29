@@ -1,6 +1,7 @@
 package com.example.movie_db_app.di
 
 import androidx.room.Room
+import com.example.movie_db_app.SplashViewModel
 import com.example.movie_db_app.data.database.AppDatabase
 import com.example.movie_db_app.data.remote.ServiceApi
 import com.example.movie_db_app.data.repository.*
@@ -76,6 +77,10 @@ val applicationModule = module {
 
     viewModel {
         FavoritesViewModel(get(), get())
+    }
+
+    viewModel {
+        SplashViewModel(get())
     }
 
     // Retrofit setup

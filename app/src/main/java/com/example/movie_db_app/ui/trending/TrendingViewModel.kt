@@ -14,47 +14,72 @@ class TrendingViewModel(
     private val moviesRepo: MoviesRepo
 ) : ViewModel() {
 
-    var moviesData = MutableLiveData<List<MovieItemResponse>>()
-    private var genresData = MutableLiveData<List<Genres>?>()
-    private var genresMap = MutableLiveData<Map<String?, String?>>()
+//    var moviesData = MutableLiveData<List<MovieItemResponse>>()
+//    private var genresData = MutableLiveData<List<Genres>?>()
+    var genresMap = MutableLiveData<Map<String?, String?>>()
+
+    var genresCache = MutableLiveData<List<Genres>?>()
+    var trendingMoviesCache = MutableLiveData<List<MovieItemResponse>?>()
 
     private val cs = CoroutineScope(Dispatchers.IO)
 
-    fun getTrendingMovies() {
+    fun getCachedGenres() {
         cs.launch {
-            moviesData.postValue(moviesRepo.getTrendingMovies().body()?.results!!)
+            genresCache.postValue(moviesRepo.genresCache)
         }
     }
 
-    fun getGenresFromApi() {
+    fun getMappedGenres() {
         cs.launch {
-            genresData.postValue(moviesRepo.getGenres())
-        }
-        mapGenres()
-        insertGenresIntoDb()
-    }
-
-    private fun insertGenresIntoDb() {
-        cs.launch {
-            genresData.value?.forEach {
-                moviesRepo.insertGenre(GenresDbModel(it.id!!.toInt(), it.name))
-            }
+            genresMap.postValue(moviesRepo.genresMap)
         }
     }
 
-    private fun mapGenres() {
+    fun getCachedMovies() {
         cs.launch {
-            val s = moviesRepo.getGenres().map {
-                it.id to it.name
-            }.toMap()
-            genresMap.postValue(s)
+            trendingMoviesCache.postValue(moviesRepo.trendingMoviesCache)
         }
+        println(moviesRepo.genresMap)
+        println(moviesRepo.genresCache)
     }
+
+//    fun getTrendingMovies() {
+//        cs.launch {
+//            val s = moviesRepo.getTrendingMovies().body()?.results!!
+//            convertGenreIdsToNames(s)
+//            moviesData.postValue(s)
+//        }
+//    }
+//
+//    fun getGenresFromApi() {
+//        cs.launch {
+//            genresData.postValue(moviesRepo.getGenres())
+//        }
+//        mapGenres()
+//        insertGenresIntoDb()
+//    }
+
+//    private fun insertGenresIntoDb() {
+//        cs.launch {
+//            genresData.value?.forEach {
+//                moviesRepo.insertGenre(GenresDbModel(it.id!!.toInt(), it.name))
+//            }
+//        }
+//    }
+
+//    private fun mapGenres() {
+//        cs.launch {
+//            val s = moviesRepo.getGenres().map {
+//                it.id to it.name
+//            }.toMap()
+//            genresMap.postValue(s)
+//        }
+//    }
 
     private fun mapGenresFromIds(ids: List<String?>): ArrayList<String?> {
         val genres = ArrayList<String?>()
         for (i in ids) {
-            val currentId = genresMap.value?.filter {
+            val currentId = genresMap.value!!.filter {
                 it.key == i
             }
             if (currentId != null && currentId.keys.isNotEmpty()) {
@@ -65,9 +90,12 @@ class TrendingViewModel(
     }
 
     fun convertGenreIdsToNames(item: List<MovieItemResponse>) {
+        val s: Regex = "\\d+".toRegex()
         for (i in item) {
-            val genreNames: ArrayList<String?> = mapGenresFromIds(i.genreIds!!)
-            i.genreIds = genreNames.toList()
+            if (s.containsMatchIn(i.genreIds?.get(0)!!)) {
+                val genreNames: ArrayList<String?> = mapGenresFromIds(i.genreIds!!)
+                i.genreIds = genreNames.toList()
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ class MovieDetailsViewModel(private val moviesRepo: MoviesRepo,
                             private val userRepo: UserRepo): ViewModel() {
 
     var castData = MutableLiveData<ArrayList<Cast>>()
+    var isMovieFavorite = MutableLiveData<Boolean>(false)
 
     private val cs = CoroutineScope(Dispatchers.IO)
 
@@ -23,10 +24,32 @@ class MovieDetailsViewModel(private val moviesRepo: MoviesRepo,
         }
     }
 
-    fun favoriteMovie(movie: Movie) {
+    fun checkIsMovieFavorite(id: Int) {
+        cs.launch {
+            isMovieFavorite.postValue(moviesRepo.isMovieFavorite(userRepo.CURRENT_USER!!, id))
+        }
+    }
+
+    fun onFavoriteClick(movie: Movie) {
+        if(isMovieFavorite.value == true) {
+            removeFavoriteMovie(movie.id!!)
+        } else {
+            favoriteMovie(movie)
+        }
+    }
+
+    private fun favoriteMovie(movie: Movie) {
         cs.launch {
             moviesRepo.insertMovie(movie)
             moviesRepo.insertMovieFavorite(userRepo.CURRENT_USER!!, movie.id!!)
+            isMovieFavorite.postValue(true)
+        }
+    }
+
+    private fun removeFavoriteMovie(id:Int) {
+        cs.launch {
+            moviesRepo.removeFavoriteMovie(userRepo.CURRENT_USER!!, id)
+            isMovieFavorite.postValue(false)
         }
     }
 

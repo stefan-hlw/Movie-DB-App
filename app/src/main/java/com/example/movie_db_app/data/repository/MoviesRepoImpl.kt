@@ -10,6 +10,10 @@ import retrofit2.Response
 class MoviesRepoImpl(
     private val serviceApi: ServiceApi, private val movieDao: MovieDao): MoviesRepo {
 
+    override var trendingMoviesCache : List<MovieItemResponse>? = null
+    override var genresCache : List<Genres>? = null
+    override var genresMap : Map<String?, String?> = mapOf()
+
     override suspend fun getTrendingMovies(): Response<MovieListResponse> {
         return serviceApi.getTrendingMovies()
     }
@@ -39,14 +43,20 @@ class MoviesRepoImpl(
     }
 
     override suspend fun insertMovieFavorite(email: String, movie_id: Int) {
-        val movieFavorite = MovieFavorite(0, email, movie_id)
+        val movieFavorite = MovieFavorite( email, movie_id)
         movieDao.insertMovieFavorite(movieFavorite)
     }
 
-    override suspend fun getFavoriteMovies(email: String): List<Movie> {
-        return movieDao.getFavoriteMovies(email)
+    override suspend fun getAllFavoriteMovies(email: String): List<Movie?>? {
+        return movieDao.getAllFavoriteMovies(email)
     }
 
-    // local private val TRENDING_MOVIES_CACHE for storing api response
+    override suspend fun isMovieFavorite(email: String, id: Int): Boolean {
+        return movieDao.isMovieFavorite(email, id)!! > 0
+    }
+
+    override suspend fun removeFavoriteMovie(email: String, id: Int) {
+        movieDao.removeFavoriteMovie(email, id)
+    }
 
 }

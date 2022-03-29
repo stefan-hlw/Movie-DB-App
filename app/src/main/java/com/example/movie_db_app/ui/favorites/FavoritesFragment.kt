@@ -1,19 +1,23 @@
 package com.example.movie_db_app.ui.favorites
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
+import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.remote.MovieItemResponse
+import com.example.movie_db_app.data.remote.MovieListResponse
 import com.example.movie_db_app.databinding.FragmentFavoritesBinding
 import com.example.movie_db_app.ui.MovieListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
     private val favoritesViewModel by viewModel<FavoritesViewModel>()
     private var movieListAdapter: MovieListAdapter? = null
@@ -38,14 +42,13 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setActionBar()
 
-        favoritesViewModel.getFavoriteMovies()
+        favoritesViewModel.getAllFavoriteMovies()
         setObservers()
     }
 
     private fun setObservers() {
         favoritesViewModel.moviesData.observe(viewLifecycleOwner, Observer {
-            println(it)
-            println("FAVORITE_MOVIE_DATA")
+            setMovieListAdapter(it)
         })
     }
 
@@ -56,11 +59,37 @@ class FavoritesFragment : Fragment() {
         binding.actionBarFavorites.actionBarTopText.text = getString(R.string.favorites)
     }
 
-    private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
-        movieListAdapter = MovieListAdapter(movieList)
-//        movieListAdapter?.setOnItemClickListener(this)
+    override fun openMovie(movie: MovieItemResponse) {
+        val bundle = bundleOf("movie" to movie)
+        findNavController().navigate(R.id.action_favoritesFragment_to_movieDetailsFragment, bundle)
+    }
+
+    private fun setMovieListAdapter(movieList: List<Movie?>?) {
+        var movieListTransformed: MutableList<MovieItemResponse>? = mutableListOf()
+        if (movieList != null) {
+            for (m in movieList) {
+                val movieTransformation = MovieItemResponse(
+                    null,
+                    backdropPath = m?.backdropPath,
+                    genreIds = listOf(m?.genres),
+                    id = m?.id!!,
+                    null,
+                    null,
+                    overview = m.overview,
+                    null,
+                    posterPath = m.posterPath,
+                    null,
+                    title = m.title,
+                    null,
+                    voteAverage = m.voteAverage,
+                    null
+                )
+                movieListTransformed?.add(movieTransformation)
+            }
+        }
+        movieListAdapter = MovieListAdapter(movieListTransformed!!.toList())
+        movieListAdapter?.setOnItemClickListener(this)
         binding.rcMoviesList.adapter = movieListAdapter
     }
 
-    // TODO Figure out what to do with MovieItemResponse and Movie, rn creating another Adapter seems like the best solution
 }

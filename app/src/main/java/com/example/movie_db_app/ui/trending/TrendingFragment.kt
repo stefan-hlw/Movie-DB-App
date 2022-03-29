@@ -38,18 +38,21 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        trendingViewModel.getGenresFromApi()
-        trendingViewModel.getTrendingMovies()
+        trendingViewModel.getMappedGenres()
 
         setActionBar()
         setObservers()
     }
 
     private fun setObservers() {
-        trendingViewModel.moviesData.observe(viewLifecycleOwner, Observer {
-            trendingViewModel.convertGenreIdsToNames(it)
-            setMovieListAdapter(it)
+        trendingViewModel.trendingMoviesCache.observe(viewLifecycleOwner, Observer {
+            trendingViewModel.convertGenreIdsToNames(it!!)
+            setMovieListAdapter(it!!)
             movieListAdapter?.notifyDataSetChanged()
+        })
+
+        trendingViewModel.genresMap.observe(viewLifecycleOwner, Observer {
+            trendingViewModel.getCachedMovies()
         })
     }
 
@@ -70,5 +73,6 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         movieListAdapter?.setOnItemClickListener(this)
         binding.rcMoviesList.adapter = movieListAdapter
     }
+
 
 }

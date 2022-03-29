@@ -1,6 +1,5 @@
 package com.example.movie_db_app.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.movie_db_app.data.database.User
@@ -21,7 +20,6 @@ class UserViewModel(
 
     fun setCurrentUser(email: String) {
         userRepo.CURRENT_USER = email
-        Log.i(userRepo.CURRENT_USER.toString(), "CURRENT_USER")
     }
 
 

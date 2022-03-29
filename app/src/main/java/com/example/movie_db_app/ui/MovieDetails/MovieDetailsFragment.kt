@@ -37,10 +37,12 @@ class MovieDetailsFragment : Fragment() {
         _binding = null
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+        movieDetailsViewModel.checkIsMovieFavorite(MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie!!.id!!)
         movieDetailsViewModel.getCast(MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie?.id!!)
         setObservers()
         populateUI()
@@ -52,23 +54,29 @@ class MovieDetailsFragment : Fragment() {
             setMovieDetailsAdapter(it)
             movieDetailsAdapter?.notifyDataSetChanged()
         })
+
+        movieDetailsViewModel.isMovieFavorite.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.favorite.setImageResource(R.drawable.ic_star_full)
+            } else {
+                binding.favorite.setImageResource(R.drawable.ic_star_outline)
+            }
+        })
     }
 
     private fun setListeners() {
         val movie: MovieItemResponse = MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie!!
+        val movieFormatted = Movie(
+            movie.id,
+            movie.backdropPath,
+            movie.genreIds.toString(),
+            movie.overview,
+            movie.posterPath,
+            movie.title,
+            movie.voteAverage
+        )
         binding.favorite.setOnClickListener {
-            var movie = Movie(
-                movie.id,
-                movie.backdropPath,
-                movie.genreIds.toString(),
-                movie.overview,
-                movie.posterPath,
-                movie.title,
-                movie.voteAverage
-            )
-            movieDetailsViewModel.favoriteMovie(movie)
-            println(movie)
-            println("FAVORITE_MOVIE")
+            movieDetailsViewModel.onFavoriteClick(movieFormatted)
         }
     }
 
