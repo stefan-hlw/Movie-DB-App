@@ -81,6 +81,9 @@
             android:name="movie"
             app:argType="com.example.movie_db_app.data.remote.MovieItemResponse"
             app:nullable="true"/>
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

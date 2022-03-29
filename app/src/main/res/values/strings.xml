@@ -16,5 +16,6 @@
     <string name="dont_have_account">Don\'t have an account? Register</string>
     <string name="already_have_account">Already have an account? Login</string>
     <string name="here">here</string>
+    <string name="favorites_empty">You have no favorite movies. Try adding some to your favorites list!</string>
     <string name ="ScrollingViewBehavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

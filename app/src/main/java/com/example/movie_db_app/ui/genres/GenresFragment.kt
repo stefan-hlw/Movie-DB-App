@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -38,6 +39,7 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        disableBackButton()
         setActionBarTop()
         setObservers()
         getData()
@@ -71,5 +73,16 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
         genreAdapter = GenresAdapter(requireContext(), genreList)
         genreAdapter?.setOnItemClickListener(this)
         binding.rcGenresList.adapter = genreAdapter
+    }
+
+    private fun disableBackButton() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // this disables the Android native back button
+                }
+            }
+        )
     }
 }

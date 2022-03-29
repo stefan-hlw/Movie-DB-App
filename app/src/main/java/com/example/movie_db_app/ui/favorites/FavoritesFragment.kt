@@ -1,10 +1,11 @@
 package com.example.movie_db_app.ui.favorites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,10 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.remote.MovieItemResponse
-import com.example.movie_db_app.data.remote.MovieListResponse
 import com.example.movie_db_app.databinding.FragmentFavoritesBinding
 import com.example.movie_db_app.ui.MovieListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
@@ -40,6 +41,7 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        disableBackButton()
         setActionBar()
 
         favoritesViewModel.getAllFavoriteMovies()
@@ -48,7 +50,11 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
     private fun setObservers() {
         favoritesViewModel.moviesData.observe(viewLifecycleOwner, Observer {
-            setMovieListAdapter(it)
+            if(!it.isNullOrEmpty()) {
+                binding.ivEmptyFavorites.visibility = GONE
+                binding.tvEmptyFavorites.visibility = GONE
+                setMovieListAdapter(it)
+            }
         })
     }
 
@@ -87,9 +93,26 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
                 movieListTransformed?.add(movieTransformation)
             }
         }
+
         movieListAdapter = MovieListAdapter(movieListTransformed!!.toList())
         movieListAdapter?.setOnItemClickListener(this)
         binding.rcMoviesList.adapter = movieListAdapter
     }
+
+    private fun disableBackButton() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // this disables the Android native back button
+                }
+            }
+        )
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
 
 }

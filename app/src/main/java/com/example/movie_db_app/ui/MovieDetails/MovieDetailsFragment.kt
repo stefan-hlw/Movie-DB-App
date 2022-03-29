@@ -5,14 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.remote.Cast
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.databinding.FragmentMovieDetailsBinding
+import com.example.movie_db_app.ui.favorites.FavoritesFragment
 import com.example.movie_db_app.utils.Constants
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,8 +43,6 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         movieDetailsViewModel.checkIsMovieFavorite(MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie!!.id!!)
         movieDetailsViewModel.getCast(MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie?.id!!)
         setObservers()
@@ -66,6 +67,7 @@ class MovieDetailsFragment : Fragment() {
 
     private fun setListeners() {
         val movie: MovieItemResponse = MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie!!
+
         val movieFormatted = Movie(
             movie.id,
             movie.backdropPath,
@@ -98,4 +100,5 @@ class MovieDetailsFragment : Fragment() {
         movieDetailsAdapter = MovieDetailsAdapter(castList)
         binding.rcCast.adapter = movieDetailsAdapter
     }
+
 }

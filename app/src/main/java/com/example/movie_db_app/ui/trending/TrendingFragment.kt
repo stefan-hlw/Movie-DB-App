@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,7 +38,7 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        disableBackButton()
         trendingViewModel.getMappedGenres()
 
         setActionBar()
@@ -74,5 +75,16 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         binding.rcMoviesList.adapter = movieListAdapter
     }
 
+
+    private fun disableBackButton() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // this disables the Android native back button
+                }
+            }
+        )
+    }
 
 }
