@@ -5,6 +5,9 @@ import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.database.MovieDao
 import com.example.movie_db_app.data.database.MovieFavorite
 import com.example.movie_db_app.data.remote.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class MoviesRepoImpl(
@@ -15,11 +18,26 @@ class MoviesRepoImpl(
     override var genresMap : Map<String?, String?> = mapOf()
 
     override suspend fun getTrendingMovies(): Response<MovieListResponse> {
-        return serviceApi.getTrendingMovies()
+        return withContext(Dispatchers.IO){
+            val response = serviceApi.getTrendingMovies()
+            trendingMoviesCache = response.body()?.results
+            response
+        }
     }
 
     override suspend fun getGenres(): List<Genres> {
-        return serviceApi.getGenres().body()?.genres!!
+        return withContext(Dispatchers.IO){
+            val genres = serviceApi.getGenres().body()?.genres!!
+            genres.map{
+                it.id to it.name
+            }.toMap().let {
+                genresMap = it
+            }
+            genres.forEach {
+                insertGenre(GenresDbModel(it.id!!.toInt(), it.name))
+            }
+            genres
+        }
     }
 
     override suspend fun getGenresFromDb(): List<GenresDbModel> {
