@@ -52,11 +52,6 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     private fun setObservers() {
         favoritesViewModel.moviesData.observe(viewLifecycleOwner, Observer {
             if(!it.isNullOrEmpty()) {
-                println("HI_MOM")
-                println(it)
-                println("HI_MOM")
-                Log.d("HI_MOTHER", it.toString())
-
                 binding.ivEmptyFavorites.visibility = GONE
                 binding.tvEmptyFavorites.visibility = GONE
                 setMovieListAdapter(it)
