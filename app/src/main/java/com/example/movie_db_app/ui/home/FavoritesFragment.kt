@@ -1,7 +1,6 @@
-package com.example.movie_db_app.ui.favorites
+package com.example.movie_db_app.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
