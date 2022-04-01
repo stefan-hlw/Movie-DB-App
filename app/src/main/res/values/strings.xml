@@ -16,6 +16,12 @@
     <string name="dont_have_account">Don\'t have an account? Register</string>
     <string name="already_have_account">Already have an account? Login</string>
     <string name="here">here</string>
+    <string name="rating">Rating: </string>
+    <string name="cast">Cast:</string>
+    <string name="movie_character_name">movie character name</string>
+    <string name="real_name">real name</string>
+    <string name="hint_full_name">Name</string>
+    <string name="hint_email">Email</string>
     <string name="favorites_empty">You have no favorite movies. Try adding some to your favorites list!</string>
     <string name ="ScrollingViewBehavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

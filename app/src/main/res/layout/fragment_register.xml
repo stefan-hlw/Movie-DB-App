@@ -7,29 +7,30 @@
     android:background="@drawable/gradient_dark_purple">
 
 
-    <TextView
-        android:id="@+id/textView3"
+    <ImageView
+        android:id="@+id/iv_register_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80sp"
-        android:text="REGISTER"
+        android:layout_marginTop="60sp"
+        android:src="@drawable/ic_register_logo"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/full_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/full_name_text"
-        android:layout_marginTop="80sp"
+        android:layout_marginTop="40sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/full_name_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_register_logo" />
 
 
     <EditText
@@ -40,12 +41,11 @@
         android:backgroundTint="@color/white"
         android:textColor="@color/white"
         android:inputType="textPersonName|textCapWords"
+        android:hint="@string/hint_full_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/full_name_text"
-        tools:layout_editor_absoluteY="311dp" />
-
+        />
 
 
     <TextView
@@ -69,6 +69,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:hint="@string/hint_email"
         android:backgroundTint="@color/white"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

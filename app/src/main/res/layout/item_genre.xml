@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:text="Category"
+        android:text="@string/genres"
         android:maxLines="1"
         android:textAlignment="center"
         android:textColor="@color/white"
