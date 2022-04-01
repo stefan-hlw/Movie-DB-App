@@ -39,8 +39,6 @@ class TrendingViewModel(
         cs.launch {
             trendingMoviesCache.postValue(moviesRepo.trendingMoviesCache)
         }
-        println(moviesRepo.genresMap)
-        println(moviesRepo.genresCache)
     }
 
 //    fun getTrendingMovies() {

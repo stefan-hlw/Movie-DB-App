@@ -1,21 +1,17 @@
 package com.example.movie_db_app.ui.MovieDetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.remote.Cast
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.databinding.FragmentMovieDetailsBinding
-import com.example.movie_db_app.ui.favorites.FavoritesFragment
 import com.example.movie_db_app.utils.Constants
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -85,7 +81,6 @@ class MovieDetailsFragment : Fragment() {
     private fun populateUI() {
         val movie = MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
         binding.title.text = movie?.title
-        Log.i(movie?.title, "MOVIE_TITLE")
         binding.expandTextView.text = movie?.overview
         binding.genres.text = movie?.genreIds.toString().drop(1).dropLast(1)
         binding.rating.text = movie?.voteAverage.toString()

@@ -27,16 +27,17 @@ class MoviesRepoImpl(
 
     override suspend fun getGenres(): List<Genres> {
         return withContext(Dispatchers.IO){
-            val genres = serviceApi.getGenres().body()?.genres!!
-            genres.map{
+            val genres = serviceApi.getGenres().body()?.genres
+            genres?.map{
                 it.id to it.name
-            }.toMap().let {
-                genresMap = it
+            }?.toMap().let {
+                if (it != null)
+                    genresMap = it
             }
-            genres.forEach {
+            genres?.forEach {
                 insertGenre(GenresDbModel(it.id!!.toInt(), it.name))
             }
-            genres
+            genres ?: listOf()
         }
     }
 
@@ -70,7 +71,7 @@ class MoviesRepoImpl(
     }
 
     override suspend fun isMovieFavorite(email: String, id: Int): Boolean {
-        return movieDao.isMovieFavorite(email, id)!! > 0
+        return movieDao.isMovieFavorite(email, id) > 0
     }
 
     override suspend fun removeFavoriteMovie(email: String, id: Int) {

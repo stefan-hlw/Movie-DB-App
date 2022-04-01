@@ -1,6 +1,7 @@
 package com.example.movie_db_app.ui.favorites
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -51,6 +52,11 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     private fun setObservers() {
         favoritesViewModel.moviesData.observe(viewLifecycleOwner, Observer {
             if(!it.isNullOrEmpty()) {
+                println("HI_MOM")
+                println(it)
+                println("HI_MOM")
+                Log.d("HI_MOTHER", it.toString())
+
                 binding.ivEmptyFavorites.visibility = GONE
                 binding.tvEmptyFavorites.visibility = GONE
                 setMovieListAdapter(it)
@@ -109,10 +115,5 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
             }
         )
     }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
 
 }

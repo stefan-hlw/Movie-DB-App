@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.repository.MoviesRepo
 import com.example.movie_db_app.data.repository.UserRepo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class FavoritesViewModel(private val moviesRepo: MoviesRepo, private val userRepo: UserRepo) : ViewModel() {
 
@@ -15,10 +13,9 @@ class FavoritesViewModel(private val moviesRepo: MoviesRepo, private val userRep
     private val cs = CoroutineScope(Dispatchers.IO)
 
     fun getAllFavoriteMovies() {
+        moviesData.value = null
         cs.launch {
             moviesData.postValue(moviesRepo.getAllFavoriteMovies(userRepo.CURRENT_USER!!))
         }
     }
-
-
 }

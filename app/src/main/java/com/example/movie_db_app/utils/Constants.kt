@@ -30,5 +30,5 @@ object Constants {
     const val CATEGORY_WESTERN = "/pmryi5NJAvWeFIfoPY6vos2YDew.jpg"
     const val CATEGORY_SCIENCE_FICTION = "/1Klz4SIhPM9o14f0hBvFz9U4Pyk.jpg"
     const val CATEGORY_TV_MOVIE = "/rNaCt8Fr6IrRGGlsVCdpP2RFkeo.jpg"
-
+    
 }
