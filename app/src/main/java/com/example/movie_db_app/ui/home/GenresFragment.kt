@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.genres
+package com.example.movie_db_app.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,6 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
     private var _binding: FragmentGenresBinding? = null
     private val binding get() = _binding!!
     private var genreAdapter: GenresAdapter? = null
-
     private val genresViewModel by viewModel<GenresViewModel>()
 
     override fun onCreateView(
@@ -64,7 +63,7 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
 
     }
 
-    override fun openCategory(category: String) {
+    override fun openCategory(category: String?) {
         val bundle = bundleOf("category" to category)
         findNavController().navigate(R.id.action_genresFragment_to_genreResultsFragment, bundle)
     }

@@ -7,11 +7,9 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_db_app.R
-import com.example.movie_db_app.data.database.Movie
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.databinding.ItemMovieBinding
 import com.example.movie_db_app.utils.Constants
-import okhttp3.internal.format
 
 
 class MovieListAdapter(
@@ -42,8 +40,7 @@ class MovieListAdapter(
     inner class ViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(movies: MovieItemResponse) {
-            var formattedGenres: String = movies.genreIds.toString().replace("]" , "")
-            formattedGenres = formattedGenres.replace("[", "")
+            val formattedGenres: String = movies.genreIds.toString().replace("[\\[]".toRegex() , "").replace("]", "")
             with(binding) {
                 title.text = movies.title
                 rating.text = movies.voteAverage.toString()

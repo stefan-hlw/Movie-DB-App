@@ -1,5 +1,6 @@
-package com.example.movie_db_app.ui
+package com.example.movie_db_app.ui.authorization
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.movie_db_app.data.database.User
@@ -20,6 +21,15 @@ class UserViewModel(
 
     fun setCurrentUser(email: String) {
         userRepo.CURRENT_USER = email
+    }
+
+    fun editUser(user: User) {
+        userRepo.editUser(user)
+    }
+
+    fun getUserProfile(): LiveData<User?> {
+        Log.i(userRepo.CURRENT_USER, "CURRENT_USER")
+        return userRepo.getUserProfile(userRepo.CURRENT_USER)
     }
 
 

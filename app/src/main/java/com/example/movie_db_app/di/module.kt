@@ -6,12 +6,11 @@ import com.example.movie_db_app.data.database.AppDatabase
 import com.example.movie_db_app.data.remote.ServiceApi
 import com.example.movie_db_app.data.repository.*
 import com.example.movie_db_app.ui.MovieDetails.MovieDetailsViewModel
-import com.example.movie_db_app.ui.trending.TrendingViewModel
-import com.example.movie_db_app.ui.UserViewModel
-import com.example.movie_db_app.ui.editProfile.ProfileViewModel
-import com.example.movie_db_app.ui.favorites.FavoritesViewModel
+import com.example.movie_db_app.ui.home.TrendingViewModel
+import com.example.movie_db_app.ui.authorization.UserViewModel
+import com.example.movie_db_app.ui.home.FavoritesViewModel
 import com.example.movie_db_app.ui.genreResults.GenreResultsViewModel
-import com.example.movie_db_app.ui.genres.GenresViewModel
+import com.example.movie_db_app.ui.home.GenresViewModel
 import com.example.movie_db_app.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -69,10 +68,6 @@ val applicationModule = module {
 
     viewModel {
         MovieDetailsViewModel(get(), get())
-    }
-
-    viewModel {
-        ProfileViewModel(get())
     }
 
     viewModel {

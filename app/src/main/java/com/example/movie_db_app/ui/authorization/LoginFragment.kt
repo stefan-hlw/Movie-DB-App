@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.login
+package com.example.movie_db_app.ui.authorization
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.databinding.FragmentLoginBinding
-import com.example.movie_db_app.ui.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {

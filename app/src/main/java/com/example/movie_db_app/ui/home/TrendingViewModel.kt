@@ -1,8 +1,7 @@
-package com.example.movie_db_app.ui.trending
+package com.example.movie_db_app.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.movie_db_app.data.database.GenresDbModel
 import com.example.movie_db_app.data.remote.Genres
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.data.repository.MoviesRepo
@@ -80,7 +79,7 @@ class TrendingViewModel(
             val currentId = genresMap.value!!.filter {
                 it.key == i
             }
-            if (currentId != null && currentId.keys.isNotEmpty()) {
+            if (currentId.keys.isNotEmpty()) {
                 genres.add(currentId.getValue(i))
             }
         }

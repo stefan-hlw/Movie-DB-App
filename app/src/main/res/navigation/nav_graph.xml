@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.movie_db_app.ui.login.LoginFragment"
+        android:name="com.example.movie_db_app.ui.authorization.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.movie_db_app.ui.registration.RegistrationFragment"
+        android:name="com.example.movie_db_app.ui.authorization.RegistrationFragment"
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/trendingFragment"
-        android:name="com.example.movie_db_app.ui.trending.TrendingFragment"
+        android:name="com.example.movie_db_app.ui.home.TrendingFragment"
         android:label="TrendingFragment" >
         <action
             android:id="@+id/action_trendingFragment_to_movieDetailsFragment"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/genresFragment"
-        android:name="com.example.movie_db_app.ui.genres.GenresFragment"
+        android:name="com.example.movie_db_app.ui.home.GenresFragment"
         android:label="GenresFragment" >
         <argument
             android:name="category"
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.movie_db_app.ui.favorites.FavoritesFragment"
+        android:name="com.example.movie_db_app.ui.home.FavoritesFragment"
         android:label="FavoritesFragment" >
         <action
             android:id="@+id/action_favoritesFragment_to_editProfileFragment"
@@ -87,6 +87,6 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.movie_db_app.ui.editProfile.ProfileFragment"
+        android:name="com.example.movie_db_app.ui.authorization.ProfileFragment"
         android:label="EditProfileFragment" />
 </navigation>

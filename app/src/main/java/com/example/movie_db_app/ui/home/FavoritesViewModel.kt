@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.favorites
+package com.example.movie_db_app.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.trending
+package com.example.movie_db_app.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,7 +48,7 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     private fun setObservers() {
         trendingViewModel.trendingMoviesCache.observe(viewLifecycleOwner, Observer {
             trendingViewModel.convertGenreIdsToNames(it!!)
-            setMovieListAdapter(it!!)
+            setMovieListAdapter(it)
             movieListAdapter?.notifyDataSetChanged()
         })
 

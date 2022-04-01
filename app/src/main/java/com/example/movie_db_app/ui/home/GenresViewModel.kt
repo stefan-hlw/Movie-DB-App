@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.genres
+package com.example.movie_db_app.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

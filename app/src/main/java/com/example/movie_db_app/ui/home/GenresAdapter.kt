@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.genres
+package com.example.movie_db_app.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -50,14 +50,13 @@ class GenresAdapter(
                 .error(R.drawable.placeholder_image)
                 .into(binding.genreImage)
             binding.genreCard.setOnClickListener {
-                println(genres.name!!)
-                onItemClickListener?.openCategory(genres.name!!)
+                onItemClickListener?.openCategory(genres.name)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun openCategory(category: String)
+        fun openCategory(category: String?)
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {

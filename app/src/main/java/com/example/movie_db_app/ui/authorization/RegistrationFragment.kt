@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.registration
+package com.example.movie_db_app.ui.authorization
 
 import android.app.DatePickerDialog
 import android.content.DialogInterface
@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
 import com.example.movie_db_app.data.database.User
 import com.example.movie_db_app.databinding.FragmentRegisterBinding
-import com.example.movie_db_app.ui.UserViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 

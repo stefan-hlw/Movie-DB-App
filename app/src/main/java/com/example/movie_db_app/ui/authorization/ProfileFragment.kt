@@ -1,4 +1,4 @@
-package com.example.movie_db_app.ui.editProfile
+package com.example.movie_db_app.ui.authorization
 
 import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
@@ -18,7 +18,7 @@ import java.util.*
 
 class ProfileFragment : Fragment() {
 
-    private val profileViewModel: ProfileViewModel by viewModel()
+    private val userViewModel: UserViewModel by viewModel()
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var uneditedUser: User
@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setObservers() {
-        profileViewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
+        userViewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
             with(binding) {
                 uneditedUser = User(it!!.email, it.password, it.full_name, it.birthday)
                 emailInput.setText(it.email)
@@ -108,7 +108,7 @@ class ProfileFragment : Fragment() {
                 birthdayPicker.text.toString()
             }
             val editedUser = User(emailInput.text.toString(), passwordInput.text.toString(), fullNameInput.text.toString(), birthday)
-            profileViewModel.editUser(editedUser)
+            userViewModel.editUser(editedUser)
         }
 
     }

@@ -12,7 +12,7 @@ import com.example.movie_db_app.R
 import com.example.movie_db_app.data.remote.MovieItemResponse
 import com.example.movie_db_app.databinding.FragmentGenreResultsBinding
 import com.example.movie_db_app.ui.MovieListAdapter
-import com.example.movie_db_app.ui.genres.GenresFragmentArgs
+import com.example.movie_db_app.ui.home.GenresFragmentArgs
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenreResultsFragment : Fragment(), MovieListAdapter.OnItemClickListener {
