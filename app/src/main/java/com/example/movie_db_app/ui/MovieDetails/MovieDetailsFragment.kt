@@ -82,7 +82,7 @@ class MovieDetailsFragment : Fragment() {
         val movie = MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
         binding.title.text = movie?.title
         binding.expandTextView.text = movie?.overview
-        binding.genres.text = movie?.genreIds.toString().drop(1).dropLast(1)
+        binding.genres.text = movie?.genreIds.toString().replace("[\\[]".toRegex() , "").replace("]", "")
         binding.rating.text = movie?.voteAverage.toString()
         Glide.with(requireContext())
             .load(Constants.IMAGE_BASE_URL + movie?.backdropPath)

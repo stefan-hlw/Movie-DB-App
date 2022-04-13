@@ -67,6 +67,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="@string/hint_password"
         android:backgroundTint="@color/white"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
