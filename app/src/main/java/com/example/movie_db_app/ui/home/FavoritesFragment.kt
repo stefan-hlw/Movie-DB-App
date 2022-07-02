@@ -94,7 +94,7 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
             }
         }
 
-        movieListAdapter = MovieListAdapter(movieListTransformed!!.toList())
+        movieListAdapter = movieListTransformed?.let { MovieListAdapter(it.toList()) }
         movieListAdapter?.setOnItemClickListener(this)
         binding.rcMoviesList.adapter = movieListAdapter
     }

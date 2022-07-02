@@ -1,6 +1,5 @@
 package com.example.movie_db_app.ui.home
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -14,7 +13,6 @@ import com.example.movie_db_app.utils.Constants
 
 
 class GenresAdapter(
-    private val context: Context,
     private val genresList: List<GenresDbModel>
 ) : RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
@@ -29,7 +27,7 @@ class GenresAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val animation: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_resources)
+        val animation: Animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.animation_resources)
         holder.itemView.startAnimation(animation)
         holder.bindView(genresList[position])
     }
@@ -44,7 +42,7 @@ class GenresAdapter(
         fun bindView(genres: GenresDbModel) {
             binding.genreTitle.text = genres.name
 
-            Glide.with(context)
+            Glide.with(binding.root.context)
                 .load(getCategoryUrl(genres.name))
                 .placeholder(R.drawable.placeholder_image)
                 .error(R.drawable.placeholder_image)

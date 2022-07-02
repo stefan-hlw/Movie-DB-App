@@ -69,7 +69,7 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
     }
 
     private fun setGenreListAdapter(genreList: List<GenresDbModel>) {
-        genreAdapter = GenresAdapter(requireContext(), genreList)
+        genreAdapter = GenresAdapter(genreList)
         genreAdapter?.setOnItemClickListener(this)
         binding.rcGenresList.adapter = genreAdapter
     }
