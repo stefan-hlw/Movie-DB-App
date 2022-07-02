@@ -2,6 +2,7 @@ package com.example.movie_db_app.ui.authorization
 
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+import android.database.sqlite.SQLiteConstraintException
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -47,13 +48,12 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun registerListeners() {
-        binding.loginHere.setOnClickListener{
+        binding.loginHere.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
         }
 
-        binding.registerButton.setOnClickListener{
+        binding.registerButton.setOnClickListener {
             createUser()
-            showRegistrationPopUpDialog()
         }
 
         val minCalendar = Calendar.getInstance()
@@ -99,6 +99,7 @@ class RegistrationFragment : Fragment() {
         val birthday = binding.birthdayPicker.text.toString()
         val user = User(email, password, fullName, birthday)
         userViewModel.createUser(user)
+        showRegistrationPopUpDialog()
     }
 
     private fun updateDateInView() {
@@ -117,7 +118,6 @@ class RegistrationFragment : Fragment() {
         val b = dialogBuilder.create()
         b.show()
     }
-
 
 }
 

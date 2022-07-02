@@ -7,6 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ServiceApi {
+
     @GET(Constants.TRENDING_MOVIES)
     suspend fun getTrendingMovies(): Response<MovieListResponse>
 

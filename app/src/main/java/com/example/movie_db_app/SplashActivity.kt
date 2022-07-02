@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
        lifecycleScope.launch{
-           splashViewModel.operation.await()
+           splashViewModel.getGenresAndTrendingFromApi.await()
        }
 
         val intent = Intent(this@SplashActivity, MainActivity::class.java)

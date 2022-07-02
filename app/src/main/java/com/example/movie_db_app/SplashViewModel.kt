@@ -8,7 +8,7 @@ import kotlinx.coroutines.*
 
 class SplashViewModel(private val moviesRepo: MoviesRepo) : ViewModel() {
 
-    val operation = viewModelScope.async {
+    val getGenresAndTrendingFromApi = viewModelScope.async {
                 listOf(
                     async { moviesRepo.getGenres() },
                     async { moviesRepo.getTrendingMovies()}

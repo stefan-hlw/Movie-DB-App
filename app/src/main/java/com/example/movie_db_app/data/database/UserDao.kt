@@ -9,6 +9,7 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun createUser(user: User)
+    // TODO create a query to return boolean response if a user with the same pk(email) exists in the database so I can handle the pop up response accordingly
 
     @Update
     suspend fun editUser(user: User)
