@@ -43,7 +43,7 @@ class MovieListAdapter(
             val formattedGenres: String = movies.genreIds.toString().replace("[\\[]".toRegex() , "").replace("]", "")
             with(binding) {
                 title.text = movies.title
-                rating.text = movies.voteAverage.toString()
+                rating.text = movies.voteAverage.toString().take(3)
                 genre.text = formattedGenres
                 Glide.with(root.context)
                     .load(Constants.IMAGE_BASE_URL + movies.posterPath.toString())
