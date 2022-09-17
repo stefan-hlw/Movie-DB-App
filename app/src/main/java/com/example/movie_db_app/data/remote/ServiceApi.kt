@@ -17,7 +17,7 @@ interface ServiceApi {
     @GET(Constants.SEARCH)
     suspend fun getSearchCategoryMovies(@Query("query") category: String): Response<MovieListResponse>
 
-    @GET("/3/movie/{movieId}/credits")
+    @GET(Constants.CAST)
     suspend fun getCast(@Path("movieId")movieId: Int): Response<CastResponse>
 
 }

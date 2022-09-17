@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -63,6 +64,23 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
             findNavController().navigate(R.id.action_favoritesFragment_to_editProfileFragment)
         }
         binding.actionBarFavorites.actionBarTopText.text = getString(R.string.favorites)
+
+        val searchView : SearchView = binding.actionBarFavorites.search
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                performSearch(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+        })
+    }
+
+    fun performSearch(category: String?) {
+        val bundle = bundleOf("category" to category)
+        findNavController().navigate(R.id.action_favoritesFragment_to_genreResultsFragment, bundle)
     }
 
     override fun openMovie(movie: MovieItemResponse) {

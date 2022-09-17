@@ -9,6 +9,7 @@ object Constants {
     const val TRENDING_MOVIES = "trending/movie/day"
     const val GENRES = "genre/movie/list"
     const val SEARCH = "search/movie"
+    const val CAST = "/3/movie/{movieId}/credits"
 
 
     const val CATEGORY_ACTION = "/zsvJowd6wkoHVk4k94oxk5SdNGQ.jpg"
