@@ -19,7 +19,7 @@ import com.example.movie_db_app.ui.MovieListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
+class FavoritesFragment : BaseHomeFragment(), MovieListAdapter.OnItemClickListener {
 
     private val favoritesViewModel by viewModel<FavoritesViewModel>()
     private var movieListAdapter: MovieListAdapter? = null
@@ -44,9 +44,14 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         disableBackButton()
         setActionBar()
-
+        setMic(binding.actionBarFavorites.ivMic)
         favoritesViewModel.getAllFavoriteMovies()
         setObservers()
+    }
+
+    override fun onStart() {
+        searchView.isIconified = true
+        super.onStart()
     }
 
     private fun setObservers() {
@@ -60,27 +65,17 @@ class FavoritesFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     }
 
     private fun setActionBar() {
-        binding.actionBarFavorites.profileIcon.setOnClickListener {
+        binding.actionBarFavorites.clProfileIconContainer.setOnClickListener {
             findNavController().navigate(R.id.action_favoritesFragment_to_editProfileFragment)
         }
         binding.actionBarFavorites.actionBarTopText.text = getString(R.string.favorites)
 
-        val searchView : SearchView = binding.actionBarFavorites.search
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                performSearch(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return true
-            }
-        })
-    }
-
-    fun performSearch(category: String?) {
-        val bundle = bundleOf("category" to category)
-        findNavController().navigate(R.id.action_favoritesFragment_to_genreResultsFragment, bundle)
+        searchView = binding.actionBarFavorites.search
+        setSearchBar(
+            binding.actionBarFavorites.search,
+            binding.actionBarFavorites.ivMic,
+            binding.actionBarFavorites.actionBarTopText,
+            R.id.action_favoritesFragment_to_genreResultsFragment)
     }
 
     override fun openMovie(movie: MovieItemResponse) {

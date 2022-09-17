@@ -1,14 +1,11 @@
 package com.example.movie_db_app.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
@@ -17,7 +14,7 @@ import com.example.movie_db_app.databinding.FragmentTrendingBinding
 import com.example.movie_db_app.ui.MovieListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
+class TrendingFragment : BaseHomeFragment(), MovieListAdapter.OnItemClickListener {
 
     private val trendingViewModel by viewModel<TrendingViewModel>()
     private var movieListAdapter: MovieListAdapter? = null
@@ -42,9 +39,14 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         disableBackButton()
         trendingViewModel.getMappedGenres()
-
+        setMic(binding.actionBarTrending.ivMic)
         setActionBar()
         setObservers()
+    }
+
+    override fun onStart() {
+        searchView.isIconified = true
+        super.onStart()
     }
 
     private fun setObservers() {
@@ -60,28 +62,18 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     }
 
     private fun setActionBar() {
-        binding.actionBarTrending.profileIcon.setOnClickListener {
+        binding.actionBarTrending.clProfileIconContainer.setOnClickListener {
             findNavController().navigate(R.id.action_trendingFragment_to_editProfileFragment)
         }
         binding.actionBarTrending.actionBarTopText.text = getString(R.string.trending)
-
-        val searchView : SearchView = binding.actionBarTrending.search
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                performSearch(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return true
-            }
-        })
+        searchView = binding.actionBarTrending.search
+        setSearchBar(
+            binding.actionBarTrending.search,
+            binding.actionBarTrending.ivMic,
+            binding.actionBarTrending.actionBarTopText,
+            R.id.action_trendingFragment_to_genreResultsFragment)
     }
 
-    fun performSearch(category: String?) {
-        val bundle = bundleOf("category" to category)
-        findNavController().navigate(R.id.action_trendingFragment_to_genreResultsFragment, bundle)
-    }
 
     override fun openMovie(movie: MovieItemResponse) {
         val bundle = bundleOf("movie" to movie)
@@ -106,4 +98,4 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
         )
     }
 
-}
+ }

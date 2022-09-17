@@ -1,14 +1,11 @@
 package com.example.movie_db_app.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.movie_db_app.R
@@ -16,7 +13,7 @@ import com.example.movie_db_app.data.database.GenresDbModel
 import com.example.movie_db_app.databinding.FragmentGenresBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
+class GenresFragment : BaseHomeFragment(), GenresAdapter.OnItemClickListener {
 
     private var _binding: FragmentGenresBinding? = null
     private val binding get() = _binding!!
@@ -42,8 +39,14 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
 
         disableBackButton()
         setActionBarTop()
+        setMic(binding.actionBarGenres.ivMic)
         setObservers()
         getData()
+    }
+
+    override fun onStart() {
+        searchView.isIconified = true
+        super.onStart()
     }
 
     private fun getData() {
@@ -59,22 +62,16 @@ class GenresFragment : Fragment(), GenresAdapter.OnItemClickListener {
 
     private fun setActionBarTop() {
         binding.actionBarGenres.actionBarTopText.text = getString(R.string.genres)
-        binding.actionBarGenres.profileIcon.setOnClickListener {
+        binding.actionBarGenres.clProfileIconContainer.setOnClickListener {
             findNavController().navigate(R.id.action_genresFragment_to_editProfileFragment)
         }
 
-        val searchView : SearchView = binding.actionBarGenres.search
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                openCategory(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return true
-            }
-        })
-
+        searchView = binding.actionBarGenres.search
+        setSearchBar(
+            binding.actionBarGenres.search,
+            binding.actionBarGenres.ivMic,
+            binding.actionBarGenres.actionBarTopText,
+            R.id.action_genresFragment_to_genreResultsFragment)
     }
 
     override fun openCategory(category: String?) {
