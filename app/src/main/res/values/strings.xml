@@ -23,6 +23,7 @@
     <string name="hint_full_name">Name</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="empty_search">No results found</string>
     <string name="favorites_empty">You have no favorite movies. Try adding some to your favorites list!</string>
     <string name ="ScrollingViewBehavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

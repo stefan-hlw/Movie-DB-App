@@ -83,7 +83,7 @@ class MovieDetailsFragment : Fragment() {
         binding.title.text = movie?.title
         binding.expandTextView.text = movie?.overview
         binding.genres.text = movie?.genreIds.toString().replace("[\\[]".toRegex() , "").replace("]", "")
-        binding.rating.text = movie?.voteAverage.toString()
+        binding.rating.text = movie?.voteAverage.toString().take(3)
         Glide.with(requireContext())
             .load(Constants.IMAGE_BASE_URL + movie?.backdropPath)
             .placeholder(R.drawable.placeholder_image)

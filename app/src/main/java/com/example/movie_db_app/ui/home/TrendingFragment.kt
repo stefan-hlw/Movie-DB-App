@@ -1,10 +1,12 @@
 package com.example.movie_db_app.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -62,6 +64,23 @@ class TrendingFragment : Fragment(), MovieListAdapter.OnItemClickListener {
             findNavController().navigate(R.id.action_trendingFragment_to_editProfileFragment)
         }
         binding.actionBarTrending.actionBarTopText.text = getString(R.string.trending)
+
+        val searchView : SearchView = binding.actionBarTrending.search
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                performSearch(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+        })
+    }
+
+    fun performSearch(category: String?) {
+        val bundle = bundleOf("category" to category)
+        findNavController().navigate(R.id.action_trendingFragment_to_genreResultsFragment, bundle)
     }
 
     override fun openMovie(movie: MovieItemResponse) {

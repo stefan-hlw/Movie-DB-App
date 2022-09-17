@@ -62,6 +62,10 @@ class GenreResultsFragment : Fragment(), MovieListAdapter.OnItemClickListener {
     }
 
     private fun setMovieListAdapter(movieList: List<MovieItemResponse>) {
+        if( movieList.isEmpty()) {
+            binding.ivEmptySearch.visibility = View.VISIBLE
+            binding.tvEmptyList.visibility = View.VISIBLE
+        }
         movieListAdapter = MovieListAdapter(movieList)
         movieListAdapter?.setOnItemClickListener(this)
         binding.rcCategoryMoviesList.adapter = movieListAdapter

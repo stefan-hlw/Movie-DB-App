@@ -26,4 +26,6 @@ interface MovieDao {
     @Query("DELETE FROM movieFavorite WHERE email = :email AND movie_id = :id")
     suspend fun removeFavoriteMovie(email: String, id:Int)
 
+    @Query("SELECT * FROM movie")
+    suspend fun getAllMovies() : List<Movie?>?
 }

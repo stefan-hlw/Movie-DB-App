@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_trendingFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_trendingFragment_to_genreResultsFragment"
+            app:destination="@id/genreResultsFragment" />
     </fragment>
     <fragment
         android:id="@+id/genresFragment"
@@ -61,6 +64,9 @@
         <action
             android:id="@+id/action_favoritesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_genreResultsFragment"
+            app:destination="@id/genreResultsFragment" />
     </fragment>
     <fragment
         android:id="@+id/genreResultsFragment"
@@ -89,4 +95,4 @@
         android:id="@+id/editProfileFragment"
         android:name="com.example.movie_db_app.ui.authorization.ProfileFragment"
         android:label="EditProfileFragment" />
-</navigation>
+   </navigation>
